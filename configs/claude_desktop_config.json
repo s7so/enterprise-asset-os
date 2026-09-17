@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "enterprise-asset-os": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/path/to/enterprise-asset-os",
+        "run",
+        "server.py"
+      ],
+      "env": {
+        "LOG_LEVEL": "INFO"
+      }
+    }
+  }
+}

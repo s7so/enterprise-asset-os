@@ -1,0 +1,52 @@
+# Enterprise Asset OS — Model Context Protocol (MCP) Server
+
+Production-grade Model Context Protocol (MCP) server built with **FastMCP 4** and **MCP Python SDK v2**, fully aligned with the **MCP 2026-07-28 Specification Baseline**.
+
+## Architecture & Features
+- **Stateless Core (2026-07-28)**: Zero handshake overhead, no `Mcp-Session-Id`, and no connection-lifetime state. Every request is self-contained via `_meta`.
+- **Dual Transport Engine**:
+  - **stdio**: Default local transport for AI hosts with strict **Stdout Isolation** (stdout reserved strictly for UTF-8 newline-delimited JSON-RPC 2.0 frames; all diagnostics directed to `stderr`).
+  - **Streamable HTTP**: Stateless HTTP POST/SSE endpoint (`MCP_TRANSPORT=http`) scalable behind round-robin load balancers without session affinity.
+- **MCP Primitives**:
+  - **Tool**: `query_telemetry` with full annotations (`readOnlyHint`, `idempotentHint`, `openWorldHint`).
+  - **Resource Template**: `config://schemas/{schema_type}` with parameter traversal protection.
+  - **Prompt**: `incident_triage_prompt` for automated SRE incident diagnostics.
+
+## Quickstart
+
+### Prerequisites
+- Python 3.10+
+- Astral `uv` 0.12+
+
+### Run Locally (stdio)
+```bash
+uv run server.py
+```
+
+### Run as Streamable HTTP Service
+```bash
+export MCP_TRANSPORT=http
+export PORT=8000
+uv run server.py
+```
+
+### Run Tests
+```bash
+uv run pytest -q
+```
+
+## Multi-Client Integration
+
+Pre-built host profiles are provided in the `configs/` directory:
+- **Claude Desktop**: [`configs/claude_desktop_config.json`](configs/claude_desktop_config.json)
+- **Cursor IDE**: [`.cursor/mcp.json`](.cursor/mcp.json)
+- **Visual Studio Code**: [`.vscode/mcp.json`](.vscode/mcp.json)
+- **Windsurf**: [`configs/windsurf_config.json`](configs/windsurf_config.json)
+
+For detailed host setup, see [`configs/README.md`](configs/README.md).
+
+## Docker Deployment
+```bash
+docker build -t enterprise-asset-os .
+docker run -p 8000:8000 -e MCP_TRANSPORT=http enterprise-asset-os
+```

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "enterprise-asset-os": {
+      "command": "uv",
+      "args": [
+        "run",
+        "server.py"
+      ]
+    }
+  }
+}

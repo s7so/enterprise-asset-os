@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "enterprise-asset-os": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "server.py"
+      ]
+    }
+  }
+}
