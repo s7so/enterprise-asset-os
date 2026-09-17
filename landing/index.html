@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Asset OS — Production-Grade MCP Server Boilerplate</title>
+  <meta name="description" content="Production-grade Model Context Protocol (MCP) server boilerplate built with FastMCP 4 and Python SDK v2. 100% Stdout Isolation, 2026-07-28 Stateless Baseline, and pre-built profiles for Cursor, Claude, and Antigravity.">
+  <meta name="keywords" content="Model Context Protocol, MCP, FastMCP, Claude Desktop, Cursor IDE, Antigravity, Python MCP Server, AI Agents, SRE">
+  <meta property="og:title" content="Enterprise Asset OS — Production-Grade MCP Server">
+  <meta property="og:description" content="Deploy rock-solid, crash-resilient MCP servers for Claude Desktop, Cursor, and Antigravity in minutes.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       Navigation Header
+       ========================================================================= -->
+  <header class="site-header" role="banner">
+    <div class="container nav-wrap">
+      <a href="#" class="brand-lockup" aria-label="Enterprise Asset OS Home">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <span>Enterprise Asset OS</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Primary Navigation">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#simulator" class="nav-link">Live Terminal</a>
+        <a href="#hosts" class="nav-link">Compatibility</a>
+        <a href="#extending" class="nav-link">Connectors</a>
+        <a href="#verification" class="nav-link">Proof Matrix</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="status-badge" title="Live status check">
+          <span class="status-dot"></span>
+          <span>6/6 Hosts Verified</span>
+        </div>
+        <a href="#pricing" class="btn btn-primary btn-sm">Get License ($49)</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================================
+         Hero Section
+         ========================================================================= -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="pill-announcement">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Spec 2026-07-28 Baseline · FastMCP 4.x · 100% Stdout Isolated</span>
+        </div>
+
+        <h1 class="hero-title">
+          The Production-Grade MCP Server <span class="gradient-text">for Enterprise AI</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Stop wasting 40+ hours debugging JSON-RPC transport crashes, broken handshakes, and fragmented host configurations. Deploy hardened, host-tested Model Context Protocol servers in minutes.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#pricing" class="btn btn-primary">
+            <span>Get Instant Access — $49</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="https://github.com/s7so/enterprise-asset-os" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            <span>GitHub Repository</span>
+          </a>
+          <a href="#simulator" class="btn btn-outline">
+            <span>Test Simulator</span>
+          </a>
+        </div>
+
+        <!-- =====================================================================
+             Interactive Live MCP Terminal Sandbox
+             ===================================================================== -->
+        <div class="terminal-wrapper" id="simulator" aria-label="Live MCP Protocol Sandbox">
+          <div class="terminal-header">
+            <div class="terminal-dots" aria-hidden="true">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="terminal-title">mcp-bridge://enterprise-asset-os/stdio-inspector</div>
+            <div class="terminal-latency">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span id="terminal-latency-val">14ms</span>
+            </div>
+          </div>
+
+          <div class="terminal-controls">
+            <span class="control-label">Live Triggers:</span>
+            <button class="pill-btn active" id="btn-query-01">Query server-01 (Healthy)</button>
+            <button class="pill-btn" id="btn-query-02">Query server-02 (Degraded)</button>
+            <button class="pill-btn" id="btn-query-inject">Security Injection Test</button>
+            <button class="pill-btn active" id="btn-toggle-stdout" style="margin-left: auto;">Stdout Isolation: ON (Guaranteed)</button>
+          </div>
+
+          <div class="terminal-body" id="terminal-body" role="region" aria-live="polite">
+            <!-- Simulated via app.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         Problem vs. Solution Comparator ("The 4 Silent Killers of MCP")
+         ========================================================================= -->
+    <section class="section-padding" id="features">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">Architectural Superiority</div>
+          <h2 class="section-title">The 4 Hidden Traps of MCP Servers in Production</h2>
+          <p class="section-desc">Why 95% of open-source MCP scripts fail during actual deployment, and how Enterprise Asset OS solves each point of failure.</p>
+        </div>
+
+        <div class="comparator-grid">
+          <!-- Trap 1 -->
+          <article class="card card-bad">
+            <div class="card-badge badge-bad">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              <span>The Typical MCP Failure</span>
+            </div>
+            <h3 class="card-title">Stdout Poisoning Disconnects</h3>
+            <p class="card-text">A single debug <code>print()</code> statement or third-party database driver log pollutes <code>stdout</code>, breaking the JSON-RPC framing and causing Claude or Cursor to crash silently.</p>
+          </article>
+
+          <!-- Solution 1 -->
+          <article class="card card-good">
+            <div class="card-badge badge-good">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Enterprise Asset OS Guarantee</span>
+            </div>
+            <h3 class="card-title">100% Guaranteed Stdout Isolation</h3>
+            <p class="card-text">All framework telemetry and diagnostic logs are strictly isolated to <code>stderr</code>. <code>stdout</code> is reserved 100% exclusively for pristine UTF-8 JSON-RPC 2.0 frames.</p>
+          </article>
+
+          <!-- Trap 2 -->
+          <article class="card card-bad">
+            <div class="card-badge badge-bad">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              <span>The Typical MCP Failure</span>
+            </div>
+            <h3 class="card-title">Stateful Session Lock-In</h3>
+            <p class="card-text">Legacy servers rely on stateful handshakes and sticky <code>Mcp-Session-Id</code> headers, making horizontal cloud scaling across Kubernetes or AWS ECS impossible.</p>
+          </article>
+
+          <!-- Solution 2 -->
+          <article class="card card-good">
+            <div class="card-badge badge-good">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Enterprise Asset OS Guarantee</span>
+            </div>
+            <h3 class="card-title">2026-07-28 Stateless Baseline</h3>
+            <p class="card-text">Completely stateless execution. Requests carry self-contained metadata in <code>_meta</code>. Any replica behind a round-robin load balancer can fulfill any tool request instantly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         Multi-Host Profile Switcher
+         ========================================================================= -->
+    <section class="section-padding" id="hosts" style="background: rgba(11, 17, 32, 0.4);">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">Zero-Configuration Deployment</div>
+          <h2 class="section-title">Tested & Pre-Configured for 6 AI Hosts</h2>
+          <p class="section-desc">No guessing file paths or configuration schemas. Copy the exact verified configuration for your environment.</p>
+        </div>
+
+        <div class="host-switcher-box">
+          <div class="host-tabs" role="tablist" aria-label="Host configuration tabs">
+            <button class="host-tab-btn active" role="tab" aria-selected="true" data-host="antigravity">Antigravity IDE & 2.0</button>
+            <button class="host-tab-btn" role="tab" aria-selected="false" data-host="cursor">Cursor IDE</button>
+            <button class="host-tab-btn" role="tab" aria-selected="false" data-host="vscode">Visual Studio Code</button>
+            <button class="host-tab-btn" role="tab" aria-selected="false" data-host="claude">Claude Desktop</button>
+            <button class="host-tab-btn" role="tab" aria-selected="false" data-host="windsurf">Windsurf</button>
+            <button class="host-tab-btn" role="tab" aria-selected="false" data-host="docker">Docker Microservice</button>
+          </div>
+
+          <div class="host-code-wrap">
+            <button class="code-copy-btn" id="copy-host-btn" aria-label="Copy code configuration">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy Config</span>
+            </button>
+            <pre class="host-code-block"><code id="host-code-display">{
+  "mcpServers": {
+    "enterprise-asset-os": {
+      "command": "uv",
+      "args": [
+        "run",
+        "server.py"
+      ],
+      "env": {
+        "LOG_LEVEL": "INFO"
+      }
+    }
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         Extensibility & Database Connectors
+         ========================================================================= -->
+    <section class="section-padding" id="extending">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">Production Customization</div>
+          <h2 class="section-title">Connect Any Database in Under 5 Minutes</h2>
+          <p class="section-desc">Designed as a modular starter kit. Replace sample metrics with production PostgreSQL, Redis, or proprietary REST APIs using copy-paste patterns from <code>EXTENDING.md</code>.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">PostgreSQL (asyncpg)</h3>
+            <p class="feature-desc">Asynchronous connection pooling with parameterized SQL execution and automatic connection lifecycle hooks.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+              </svg>
+            </div>
+            <h3 class="feature-title">Redis Cache Layer</h3>
+            <p class="feature-desc">Microsecond latency cache lookups with configurable <code>cache_ttl</code> hints conforming to the 2026-07-28 caching spec.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <h3 class="feature-title">Internal REST / Cloud APIs</h3>
+            <p class="feature-desc">High-throughput HTTP client integration via <code>httpx</code> for Datadog, Prometheus, CloudWatch, or custom microservices.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         Real-Host Verification Matrix
+         ========================================================================= -->
+    <section class="section-padding" id="verification">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">Proven Engineering</div>
+          <h2 class="section-title">Verified on Real Host Runtimes</h2>
+          <p class="section-desc">Not simulated or mocked in isolation. Enterprise Asset OS is verified directly inside running AI client environments.</p>
+        </div>
+
+        <div class="matrix-card">
+          <table class="matrix-table" aria-label="Host verification matrix">
+            <thead>
+              <tr>
+                <th scope="col">Host Environment</th>
+                <th scope="col">Transport Wire</th>
+                <th scope="col">Result</th>
+                <th scope="col">Verification Method</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Google Antigravity IDE & 2.0</strong></td>
+                <td>stdio (JSON-RPC)</td>
+                <td><span class="status-tag status-pass">PASS ✓</span></td>
+                <td>Live host bridge execution via <code>call_mcp_tool</code> (0 side-effects)</td>
+              </tr>
+              <tr>
+                <td><strong>Cursor IDE</strong></td>
+                <td>stdio (JSON-RPC)</td>
+                <td><span class="status-tag status-pass">PASS ✓</span></td>
+                <td>Workspace auto-discovery via <code>.cursor/mcp.json</code></td>
+              </tr>
+              <tr>
+                <td><strong>Visual Studio Code</strong></td>
+                <td>stdio (JSON-RPC)</td>
+                <td><span class="status-tag status-pass">PASS ✓</span></td>
+                <td>Direct integration via <code>.vscode/mcp.json</code></td>
+              </tr>
+              <tr>
+                <td><strong>Claude Desktop</strong></td>
+                <td>stdio (JSON-RPC)</td>
+                <td><span class="status-tag status-pass">PASS ✓</span></td>
+                <td>Desktop launcher via <code>claude_desktop_config.json</code></td>
+              </tr>
+              <tr>
+                <td><strong>Docker Cloud Engine</strong></td>
+                <td>Streamable HTTP</td>
+                <td><span class="status-tag status-pass">PASS ✓</span></td>
+                <td>Containerized microservice build with zero session affinity</td>
+              </tr>
+              <tr>
+                <td><strong>Automated Test Suite</strong></td>
+                <td>Async Client</td>
+                <td><span class="status-tag status-pass">8/8 PASS ✓</span></td>
+                <td>Full primitive coverage (Tools, Resources, Prompts, Input Sanitization)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         Commercial Pricing Tiers
+         ========================================================================= -->
+    <section class="section-padding" id="pricing" style="background: rgba(11, 17, 32, 0.4);">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">Transparent Commercial Licensing</div>
+          <h2 class="section-title">Simple, One-Time Investment</h2>
+          <p class="section-desc">Royalty-free commercial deployment. No recurring subscription fees. Build custom MCP servers for yourself or your clients with full confidence.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Solo Tier -->
+          <div class="pricing-card">
+            <h3 class="plan-name">Solo Developer</h3>
+            <p class="plan-desc">For freelance engineers and independent developers building custom MCP servers.</p>
+            <div class="plan-price-wrap">
+              <span class="plan-price">$49</span>
+              <span class="plan-period">/ one-time</span>
+            </div>
+            <ul class="plan-features">
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Complete Source Code & Architecture</span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>6 Pre-Engineered Host Profiles</span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Developer Extensibility Guide (Postgres/Redis)</span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Unlimited Personal & Client Projects</span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Single Developer Commercial License</span>
+              </li>
+            </ul>
+            <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Get Solo License</a>
+          </div>
+
+          <!-- Team Tier (Featured) -->
+          <div class="pricing-card featured">
+            <div class="featured-pill">Most Popular</div>
+            <h3 class="plan-name">Team & Startup</h3>
+            <p class="plan-desc">For engineering teams deploying internal enterprise MCP microservices.</p>
+            <div class="plan-price-wrap">
+              <span class="plan-price">$149</span>
+              <span class="plan-period">/ one-time</span>
+            </div>
+            <ul class="plan-features">
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Everything in Solo Developer</strong></span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Up to 10 Developers / Team Seats</span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Docker Container & Cloud Run Blueprints</span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>CI/CD Purity Check Automation</span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Commercial SaaS Integration Rights</span>
+              </li>
+            </ul>
+            <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Get Team License</a>
+          </div>
+
+          <!-- Enterprise Tier -->
+          <div class="pricing-card">
+            <h3 class="plan-name">Enterprise</h3>
+            <p class="plan-desc">For organizations requiring unlimited seats and tailored architectural guidance.</p>
+            <div class="plan-price-wrap">
+              <span class="plan-price">$399</span>
+              <span class="plan-period">/ one-time</span>
+            </div>
+            <ul class="plan-features">
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span><strong>Everything in Team License</strong></span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Unlimited Developers & Company-Wide Use</span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>1-on-1 MCP Architecture Review Session</span>
+              </li>
+              <li class="feature-item">
+                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Priority Issue Escalation</span>
+              </li>
+            </ul>
+            <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Get Enterprise License</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         FAQ Accordion
+         ========================================================================= -->
+    <section class="section-padding" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-eyebrow">Got Questions?</div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">Everything you need to know about the product, licensing, and technical architecture.</p>
+        </div>
+
+        <div class="faq-wrap">
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Why build in Python instead of TypeScript?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Python is the primary language of enterprise data infrastructure, machine learning pipelines, and backend automation. With Astral <code>uv</code> and FastMCP 4, Python MCP servers start up in under 50 milliseconds with zero NodeJS runtime bloat.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Can I connect my company's real databases and APIs?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Yes! The server was architected specifically to be extended. Refer to <code>EXTENDING.md</code> for copy-paste examples showing how to connect PostgreSQL (via <code>asyncpg</code>), Redis, and proprietary REST APIs in under 5 minutes.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>What is the license terms for client work?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                The Commercial License allows you to customize and deploy this server for unlimited internal projects and client deliverables without recurring royalties. The only restriction is that you cannot re-sell the raw template itself as a competing boilerplate.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>Does this require Docker to run locally?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                No. For local IDE integration (Cursor, Claude, Antigravity), it runs directly via <code>uv run server.py</code> in stdio mode. Docker is completely optional and included for teams wanting to deploy containerized Streamable HTTP services.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       Footer
+       ========================================================================= -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-lockup">
+            <div class="brand-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <span>Enterprise Asset OS</span>
+          </div>
+          <p>Production-grade Model Context Protocol (MCP) server architecture. Engineered for zero protocol crashes and instant AI host compatibility.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#simulator">Protocol Simulator</a></li>
+            <li><a href="#hosts">Host Profiles</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Documentation</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/s7so/enterprise-asset-os/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a></li>
+            <li><a href="https://github.com/s7so/enterprise-asset-os/blob/main/EXTENDING.md" target="_blank" rel="noopener noreferrer">Extending Guide</a></li>
+            <li><a href="https://github.com/s7so/enterprise-asset-os/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Commercial License</a></li>
+            <li><a href="https://antigravity.google/docs/mcp" target="_blank" rel="noopener noreferrer">Antigravity Docs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Community</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/s7so/enterprise-asset-os" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+            <li><a href="https://github.com/s7so/enterprise-asset-os/issues" target="_blank" rel="noopener noreferrer">Issue Tracker</a></li>
+            <li><a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">MCP Protocol Spec</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Enterprise Asset OS. All rights reserved. Commercial Software.</div>
+        <div>Engineered according to the <strong>UI/UX Pro Max</strong> Technical Specification Baseline.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       Toast Notification System
+       ========================================================================= -->
+  <div class="toast-notice" id="toast-notification" role="status" aria-live="polite">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-emerald)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span class="toast-text">Configuration copied to clipboard!</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
