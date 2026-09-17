@@ -35,7 +35,14 @@ uv run server.py
 ```
 
 ### التشغيل كخدمة شبكية (HTTP)
+- **أنظمة Linux / macOS (Bash):**
 ```bash
+export MCP_TRANSPORT=http
+export PORT=8000
+uv run server.py
+```
+- **أنظمة Windows (PowerShell):**
+```powershell
 $env:MCP_TRANSPORT="http"
 $env:PORT="8000"
 uv run server.py

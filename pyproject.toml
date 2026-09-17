@@ -1,7 +1,7 @@
 [project]
 name = "enterprise-asset-os"
 version = "0.1.0"
-description = "Add your description here"
+description = "Production-grade Enterprise Asset & Telemetry MCP Server built with FastMCP 4 (2026-07-28 stateless baseline)"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
