@@ -31,6 +31,7 @@ async def test_primitives_registered():
         resources = await client.list_resource_templates()
 
         assert any(t.name == "query_telemetry" for t in tools)
+        assert any(t.name == "query_store_inventory" for t in tools)
         assert any(p.name == "incident_triage_prompt" for p in prompts)
         assert any(r.uri_template == "config://schemas/{schema_type}" for r in resources)
 
@@ -100,3 +101,34 @@ async def test_security_tool_annotations():
         assert telemetry_tool.annotations.read_only_hint is True
         assert telemetry_tool.annotations.idempotent_hint is True
         assert telemetry_tool.annotations.open_world_hint is False
+
+        store_tool = next(t for t in tools if t.name == "query_store_inventory")
+        assert store_tool.annotations.read_only_hint is True
+        assert store_tool.annotations.idempotent_hint is True
+
+
+@pytest.mark.asyncio
+async def test_query_store_inventory_low_stock():
+    """Verify query_store_inventory correctly flags low-stock items under threshold."""
+    async with Client(mcp) as client:
+        result = await client.call_tool("query_store_inventory", {"max_stock_threshold": 10})
+        data = result.data
+        assert data["status"] == "success"
+        assert data["threshold_applied"] == 10
+        assert isinstance(data["replenishment_needed"], list)
+        for item in data["replenishment_needed"]:
+            assert item["current_stock"] <= 10
+            assert "title" in item
+            assert item["urgency"] in ("CRITICAL", "WARNING")
+
+
+@pytest.mark.asyncio
+async def test_query_store_inventory_with_category():
+    """Verify query_store_inventory filters by category properly."""
+    async with Client(mcp) as client:
+        result = await client.call_tool("query_store_inventory", {"category": "groceries", "max_stock_threshold": 20})
+        data = result.data
+        assert data["status"] == "success"
+        for item in data["replenishment_needed"]:
+            assert "groceries" in item["category"].lower()
+

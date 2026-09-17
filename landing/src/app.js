@@ -299,6 +299,42 @@ docker run -p 8000:8000 -e MCP_TRANSPORT=http enterprise-asset-os
 
 # الاتصال من عملاء الذكاء الاصطناعي عبر بروتوكول HTTP الانسيابي
 # endpoint: http://localhost:8000/mcp (Stateless 2026-07-28)`
+    },
+    chatgpt: {
+      title: "ChatGPT Developer Mode (Streamable HTTP / Remote MCP)",
+      snippet: `# 1. تشغيل الخادم بنمط HTTP لنقل البيانات الانسيابي:
+MCP_TRANSPORT=http PORT=8000 uv run server.py
+
+# 2. إنشاء نفق عام (Tunnel) للاختبار المحلي عبر ngrok أو cloudflared:
+ngrok http 8000
+
+# 3. في واجهة شات جي بي تي (ChatGPT):
+# الإعدادات (Settings) > الأمان وتسجيل الدخول > تفعيل وضع المطورين (Developer Mode)
+# أضف رابط خادم MCP الجديد:
+https://<your-subdomain>.ngrok-free.app/mcp
+
+# المصدر الرسمي المعتمد لعام 2026:
+# OpenAI Developer Platform — Model Context Protocol in ChatGPT`
+    },
+    grok: {
+      title: "xAI Grok Connectors & CLI (~/.grok/config.toml)",
+      snippet: `# 1. الربط عبر واجهة ويب Grok Connectors:
+# افتح الرابط: https://grok.com/connectors
+# اضغط "Add Custom MCP Connector" ثم ضع رابط الخادم:
+https://<your-server-domain-or-tunnel>/mcp
+
+# 2. أو الربط الفوري عبر موجه أوامر Grok CLI:
+grok mcp add enterprise-asset-os https://<your-server-domain-or-tunnel>/mcp
+
+# 3. أو عبر ملف الإعداد المحلي (~/.grok/config.toml):
+[mcp_servers.enterprise_asset_os]
+name = "enterprise-asset-os"
+transport = "http"
+url = "https://<your-server-domain-or-tunnel>/mcp"
+timeout = 30
+
+# المصدر الرسمي المعتمد لعام 2026:
+# xAI Developer Documentation (docs.x.ai) — Remote MCP Tools Specification`
     }
   };
 

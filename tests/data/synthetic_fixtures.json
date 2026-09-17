@@ -88,5 +88,47 @@
       "provider": "canonical-baseline",
       "classification": "synthetic — format-compatible"
     }
-  }
+  },
+  "products": [
+    {
+      "id": 101,
+      "title": "Wireless Noise-Canceling Headphones",
+      "category": "electronics",
+      "stock": 4,
+      "price": 149.99,
+      "sku": "ELEC-WNC-101"
+    },
+    {
+      "id": 102,
+      "title": "Mechanical Gaming Keyboard RGB",
+      "category": "electronics",
+      "stock": 8,
+      "price": 89.50,
+      "sku": "ELEC-MGK-102"
+    },
+    {
+      "id": 103,
+      "title": "Organic Arabica Coffee Beans 1KG",
+      "category": "groceries",
+      "stock": 6,
+      "price": 24.00,
+      "sku": "GROC-OAC-103"
+    },
+    {
+      "id": 104,
+      "title": "Cold-Pressed Extra Virgin Olive Oil 500ml",
+      "category": "groceries",
+      "stock": 18,
+      "price": 15.00,
+      "sku": "GROC-EVO-104"
+    },
+    {
+      "id": 105,
+      "title": "Ergonomic Mesh Executive Chair",
+      "category": "furniture",
+      "stock": 22,
+      "price": 299.00,
+      "sku": "FURN-EME-105"
+    }
+  ]
 }

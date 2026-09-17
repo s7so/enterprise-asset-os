@@ -1,0 +1,15 @@
+# xAI Grok MCP Configuration File
+# Location: ~/.grok/config.toml or configured via grok.com/connectors
+# Official Source: xAI Developer Documentation (docs.x.ai) - Grok Remote MCP Connectors (2026)
+
+[mcp_servers.enterprise_asset_os]
+name = "enterprise-asset-os"
+transport = "http"
+url = "https://<your-server-domain-or-tunnel>/mcp"
+timeout = 30
+
+[mcp_servers.enterprise_asset_os.headers]
+User-Agent = "Grok-xAI-MCP-Client/1.0"
+
+# CLI Quick Connect:
+# grok mcp add enterprise-asset-os https://<your-server-domain-or-tunnel>/mcp

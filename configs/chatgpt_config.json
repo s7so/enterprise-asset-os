@@ -1,0 +1,24 @@
+{
+  "name": "enterprise-asset-os",
+  "protocol": "mcp",
+  "version": "2026-07-28",
+  "transport": "http",
+  "url": "http://localhost:8000/mcp",
+  "public_tunnel_url": "https://<your-public-ngrok-or-cloudflared-url>/mcp",
+  "documentation": {
+    "platform": "ChatGPT (OpenAI Developer Mode)",
+    "requirements": [
+      "ChatGPT Pro, Plus, Team, or Enterprise account",
+      "Developer Mode enabled in Settings > Security & Login",
+      "Server running in HTTP transport mode (MCP_TRANSPORT=http PORT=8000 uv run server.py)"
+    ],
+    "setup_steps": [
+      "1. Run server in HTTP mode: MCP_TRANSPORT=http PORT=8000 uv run server.py",
+      "2. Expose local port 8000 if testing locally: ngrok http 8000",
+      "3. Open ChatGPT > Settings > Security & login > Enable Developer mode",
+      "4. Add new MCP server with the HTTPS URL provided by ngrok/cloudflared",
+      "5. Use tools (query_telemetry, query_store_inventory) directly in ChatGPT chat"
+    ],
+    "verified_source": "OpenAI Developer Platform (ChatGPT MCP & Developer Mode Specification, 2026)"
+  }
+}

@@ -6,6 +6,7 @@ from enterprise_asset_os.server import (
     mcp,
     run_server,
     query_telemetry,
+    query_store_inventory,
     get_config_schema,
     incident_triage_prompt,
     ASSET_DB,

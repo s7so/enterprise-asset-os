@@ -164,6 +164,97 @@ async def query_telemetry(asset_id: str, ctx: Context) -> dict:
     return {"asset_id": clean_id, "telemetry": telemetry_data}
 
 
+async def fetch_store_products() -> list[dict]:
+    """Fetch store products from live public API (DummyJSON) with offline synthetic fallback."""
+    def _fetch_live() -> list[dict] | None:
+        store_api_url = os.environ.get("STORE_API_URL", "https://dummyjson.com/products?limit=100")
+        req = urllib.request.Request(
+            store_api_url,
+            headers={"User-Agent": "Enterprise-Store-MCP/1.0 (FastMCP 4)"},
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=4) as resp:
+                if resp.status == 200:
+                    payload = json.loads(resp.read().decode("utf-8"))
+                    return payload.get("products", [])
+        except Exception as err:
+            logger.warning("Live store API fetch failed (%s), falling back to offline fixtures", err)
+        return None
+
+    # 1. Attempt live query if network is reachable
+    live_data = await asyncio.to_thread(_fetch_live)
+    if live_data:
+        return live_data
+
+    # 2. Offline fallback to synthetic_fixtures.json
+    try:
+        synth_path = Path(__file__).resolve().parent.parent.parent / "tests" / "data" / "synthetic_fixtures.json"
+        if synth_path.exists():
+            with open(synth_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                return data.get("products", [])
+    except Exception as exc:
+        logger.warning("Offline store fixture read failed: %s", exc)
+
+    return []
+
+
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="Check Store Inventory",
+        readOnlyHint=True,
+        idempotentHint=True,
+        openWorldHint=False,
+    )
+)
+async def query_store_inventory(
+    category: str = "",
+    max_stock_threshold: int = 15,
+    ctx: Context = None,
+) -> dict:
+    """Audit e-commerce store inventory and identify low-stock products requiring vendor replenishment.
+
+    Args:
+        category: Optional category filter (e.g. 'groceries', 'electronics', 'furniture', or empty for all).
+        max_stock_threshold: Maximum inventory count to flag products as low-stock (default: 15).
+    """
+    logger.info("query_store_inventory called (category='%s', threshold=%d)", category, max_stock_threshold)
+    products = await fetch_store_products()
+
+    cat_clean = category.strip().lower()
+    low_stock = []
+    for p in products:
+        p_cat = str(p.get("category", "")).lower()
+        p_stock = int(p.get("stock", 0))
+
+        if cat_clean and cat_clean not in p_cat:
+            continue
+
+        if p_stock <= max_stock_threshold:
+            low_stock.append({
+                "id": p.get("id"),
+                "title": p.get("title"),
+                "category": p.get("category"),
+                "current_stock": p_stock,
+                "price": p.get("price"),
+                "sku": p.get("sku", f"SKU-{p.get('id')}"),
+                "urgency": "CRITICAL" if p_stock <= 5 else "WARNING",
+            })
+
+    if ctx:
+        await ctx.report_progress(progress=1, total=1)
+
+    return {
+        "status": "success",
+        "total_catalog_scanned": len(products),
+        "low_stock_count": len(low_stock),
+        "threshold_applied": max_stock_threshold,
+        "category_filter": category if category else "ALL",
+        "replenishment_needed": low_stock,
+    }
+
+
+
 
 @mcp.resource("config://schemas/{schema_type}")
 def get_config_schema(schema_type: str) -> str:

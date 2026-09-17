@@ -43,6 +43,8 @@ Pre-built host profiles are provided for all major AI environments:
 - **Visual Studio Code**: [`.vscode/mcp.json`](.vscode/mcp.json)
 - **Claude Desktop**: [`configs/claude_desktop_config.json`](configs/claude_desktop_config.json)
 - **Windsurf**: [`configs/windsurf_config.json`](configs/windsurf_config.json)
+- **ChatGPT (OpenAI Developer Mode)**: [`configs/chatgpt_config.json`](configs/chatgpt_config.json)
+- **Grok (xAI Connectors & CLI)**: [`configs/grok_config.toml`](configs/grok_config.toml)
 
 For detailed host setup and troubleshooting, see [`configs/README.md`](configs/README.md).
 

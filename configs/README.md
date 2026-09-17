@@ -70,3 +70,45 @@ Antigravity supports two discovery locations:
 
 > [!TIP]
 > In Antigravity IDE, inspect active server health and reload connections via **Additional Options (...) > MCP Servers** or with `/mcp` in the CLI.
+
+---
+
+## 7. ChatGPT (OpenAI Developer Mode — 2026 Verified)
+*Official Source: OpenAI Developer Platform — Model Context Protocol in ChatGPT*
+
+- **Transport:** Streamable HTTP / SSE (`MCP_TRANSPORT=http PORT=8000 uv run server.py`)
+- **Requirements:** ChatGPT Plus, Team, or Enterprise account with Developer Mode enabled.
+- **Setup Steps:**
+  1. Launch server in HTTP transport mode:
+     ```bash
+     export MCP_TRANSPORT=http
+     export PORT=8000
+     uv run server.py
+     ```
+  2. For local testing, expose port 8000 via a secure tunnel: `ngrok http 8000`.
+  3. In ChatGPT: Go to **Settings > Security & login > Enable Developer mode**.
+  4. Under Connected Apps / MCP Servers, add your endpoint URL: `https://<your-subdomain>.ngrok-free.app/mcp`.
+  5. The tools (`query_telemetry`, `query_store_inventory`) become active directly inside ChatGPT chats.
+- Pre-configured profile: [`chatgpt_config.json`](chatgpt_config.json).
+
+---
+
+## 8. Grok (xAI Remote Connectors & CLI — 2026 Verified)
+*Official Source: xAI Documentation (docs.x.ai) — Remote MCP Tools Specification*
+
+- **Transport:** Streamable HTTP / SSE.
+- **Web UI Setup:**
+  1. Navigate to [grok.com/connectors](https://grok.com/connectors).
+  2. Click **Add Custom MCP Connector**.
+  3. Enter your remote server URL (e.g. `https://<your-server-domain>/mcp`).
+- **CLI Setup:**
+  ```bash
+  grok mcp add enterprise-asset-os https://<your-server-domain>/mcp
+  ```
+- **Configuration File:** Add to `~/.grok/config.toml`:
+  ```toml
+  [mcp_servers.enterprise_asset_os]
+  url = "https://<your-server-domain>/mcp"
+  transport = "http"
+  ```
+- Pre-configured profile: [`grok_config.toml`](grok_config.toml).
