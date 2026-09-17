@@ -37,16 +37,24 @@ uv run pytest -q
 
 ## Multi-Client Integration
 
-Pre-built host profiles are provided in the `configs/` directory:
-- **Claude Desktop**: [`configs/claude_desktop_config.json`](configs/claude_desktop_config.json)
+Pre-built host profiles are provided for all major AI environments:
+- **Google Antigravity IDE & 2.0**: [`.agents/mcp_config.json`](.agents/mcp_config.json) (Auto-discovered)
 - **Cursor IDE**: [`.cursor/mcp.json`](.cursor/mcp.json)
 - **Visual Studio Code**: [`.vscode/mcp.json`](.vscode/mcp.json)
+- **Claude Desktop**: [`configs/claude_desktop_config.json`](configs/claude_desktop_config.json)
 - **Windsurf**: [`configs/windsurf_config.json`](configs/windsurf_config.json)
 
-For detailed host setup, see [`configs/README.md`](configs/README.md).
+For detailed host setup and troubleshooting, see [`configs/README.md`](configs/README.md).
+
+## Customization & Production Deployment
+
+To connect live PostgreSQL databases, Redis clusters, or proprietary SRE APIs, follow the comprehensive [Developer Extensibility Guide (`EXTENDING.md`)](EXTENDING.md).
 
 ## Docker Deployment
 ```bash
 docker build -t enterprise-asset-os .
 docker run -p 8000:8000 -e MCP_TRANSPORT=http enterprise-asset-os
 ```
+
+## License
+Commercial Software License. See [`LICENSE`](LICENSE) for complete terms.

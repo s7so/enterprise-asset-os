@@ -55,8 +55,14 @@ uv run pytest -q
 - **Windsurf**: انسخ محتوى `configs/windsurf_config.json`.
 - **Antigravity IDE & 2.0**: تم إعداد الملف مسبقاً في مسار المشروع [`.agents/mcp_config.json`](.agents/mcp_config.json) للاكتشاف التلقائي الفوري، أو عبر الإعداد العام `~/.gemini/config/mcp_config.json` وفق التوثيق الرسمي ([antigravity.google/docs/mcp](https://antigravity.google/docs/mcp)).
 
+## دليل التطوير وربط البيانات الحقيقية
+لربط الخادم بقواعد بيانات حقيقية (PostgreSQL عبر `asyncpg`، أو Redis، أو واجهات REST السحابية)، يرجى مراجعة [دليل التطوير والامتداد (`EXTENDING.md`)](EXTENDING.md).
+
 ## النشر بواسطة حاويات Docker
 ```bash
 docker build -t enterprise-asset-os .
 docker run -p 8000:8000 -e MCP_TRANSPORT=http enterprise-asset-os
 ```
+
+## الترخيص التجاري
+المنتج محمي بترخيص تجاري رسمي، راجع ملف [`LICENSE`](LICENSE) لمعرفة كافة الحقوق وشروط الاستخدام.
