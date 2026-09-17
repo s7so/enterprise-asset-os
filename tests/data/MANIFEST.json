@@ -1,0 +1,90 @@
+{
+  "version": "1.2.0",
+  "generation_date": "2026-09-17",
+  "hash_method": "sha256-of-raw-bytes",
+  "distribution_policy": "fetch-on-demand only; zero research data bundled in release artifacts",
+  "license": "LICENSE OF LOGHUB: data files collected from open source repositories; use for research/academic purposes; citation of Zhu et al. (arXiv:2308.07703) appreciated.",
+  "academic_citation": "Jieming Zhu, Shilin He, Pinjia He, Jinyang Liu, Michael R. Lyu. Loghub: A Large Collection of System Log Datasets for AI-driven Log Analytics. In ISSRE, 2023. arXiv:2308.07703.",
+  "canonical_upstream_sources": {
+    "Linux_2k.log": {
+      "source_url": "https://raw.githubusercontent.com/logpai/loghub/master/Linux/Linux_2k.log",
+      "local_path": "tests/data/raw/Linux_2k.log",
+      "size_bytes": 216485,
+      "sha256": "b3e20bc1afe732ab1bf3ed1de4bf9c809e4194e02f7dea911d918e5342e8e173"
+    },
+    "OpenStack_2k.log": {
+      "source_url": "https://raw.githubusercontent.com/logpai/loghub/master/OpenStack/OpenStack_2k.log",
+      "local_path": "tests/data/raw/OpenStack_2k.log",
+      "size_bytes": 595119,
+      "sha256": "025a1bc64ff5b2ef4a4bda6c4ad5c5c5f18478b71cd1ad2b0676e01625629f2f"
+    },
+    "HDFS_2k.log": {
+      "source_url": "https://raw.githubusercontent.com/logpai/loghub/master/HDFS/HDFS_2k.log",
+      "local_path": "tests/data/raw/HDFS_2k.log",
+      "size_bytes": 287848,
+      "sha256": "7c967000980c086ed55fa6544ba4f05fe66d44622795e890c68caf8bbb635035"
+    }
+  },
+  "fixtures": {
+    "real_incidents.json": {
+      "local_path": "tests/data/real_incidents.json",
+      "size_bytes": 7231,
+      "sha256": "2fa335437951e09f87b239f0a42ac0863499b57a17ca5b71f134af43dd697f16",
+      "classification": "100% genuine continuous line-slice from downloaded raw logs",
+      "samples": [
+        {
+          "id": "INC-LOGHUB-LINUX-001",
+          "source": "Linux_2k.log",
+          "lines": "L10-L35"
+        },
+        {
+          "id": "INC-LOGHUB-OPENSTACK-002",
+          "source": "OpenStack_2k.log",
+          "lines": "L55-L62"
+        },
+        {
+          "id": "INC-LOGHUB-HDFS-003",
+          "source": "HDFS_2k.log",
+          "lines": "L78-L85"
+        }
+      ]
+    },
+    "real_cluster_nodes.json": {
+      "local_path": "tests/data/real_cluster_nodes.json",
+      "size_bytes": 2236,
+      "sha256": "6a744988c878339767fa3af376e989320980014d376d1db59139141de30038c5",
+      "classification": "hybrid (extracted node identifiers + representative cloud-format samples + synthetic telemetry attributes)",
+      "composition": {
+        "extracted_identifiers": [
+          {
+            "id": "10.251.30.85:50010",
+            "source": "HDFS_2k.log:L78"
+          },
+          {
+            "id": "10.251.126.255:50010",
+            "source": "HDFS_2k.log:L79"
+          },
+          {
+            "id": "10.251.71.68:50010",
+            "source": "HDFS_2k.log:L80"
+          },
+          {
+            "id": "b9000564-fe1a-409b-b8cc-1e88b294cd1d",
+            "source": "OpenStack_2k.log:L55"
+          },
+          {
+            "id": "10.11.10.1",
+            "source": "OpenStack_2k.log:L56"
+          }
+        ],
+        "representative_format_samples": [
+          "i-0a81b2c3d4e5f6789 (AWS EC2)",
+          "gke-prod-cluster-pool-1-a1b2 (GCP GKE)",
+          "aks-nodepool1-28491028-vmss000001 (Azure AKS)",
+          "node-worker-01.infra.internal (Internal FQDN)"
+        ],
+        "telemetry_attributes": "synthetic across all entries"
+      }
+    }
+  }
+}

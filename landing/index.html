@@ -1,224 +1,397 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enterprise Asset OS — Production-Grade MCP Server Boilerplate</title>
-  <meta name="description" content="Production-grade Model Context Protocol (MCP) server boilerplate built with FastMCP 4 and Python SDK v2. 100% Stdout Isolation, 2026-07-28 Stateless Baseline, and pre-built profiles for Cursor, Claude, and Antigravity.">
-  <meta name="keywords" content="Model Context Protocol, MCP, FastMCP, Claude Desktop, Cursor IDE, Antigravity, Python MCP Server, AI Agents, SRE">
-  <meta property="og:title" content="Enterprise Asset OS — Production-Grade MCP Server">
-  <meta property="og:description" content="Deploy rock-solid, crash-resilient MCP servers for Claude Desktop, Cursor, and Antigravity in minutes.">
-  <meta property="og:type" content="website">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>البرمجة بالبلدي — خادم بروتوكول MCP الأكثر صلابة وموثوقية</title>
+  <meta name="description" content="نظام Enterprise Asset OS من منصة البرمجة بالبلدي — خادم بروتوكول Model Context Protocol عالي الصلابة، معزول تماماً عن انهيارات تلوث قنوات Stdout، ومجهز لـ 6 بيئات ذكاء اصطناعي بسعر 400 جنية مصري فقط." />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="البرمجة بالبلدي — خادم بروتوكول MCP الأكثر صلابة وموثوقية" />
+  <meta property="og:description" content="توقف عن المعاناة مع انهيار خوادم الذكاء الاصطناعي. انشر خادماً برمجياً معتمداً ومتوافقاً مع مواصفات 2026-07-28 خلال 5 دقائق." />
+  <meta property="og:type" content="website" />
+  
+  <!-- Google Fonts: Cairo (Arabic Primary) & JetBrains Mono (Code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Vite Stylesheet Entrypoint -->
+  <link rel="stylesheet" href="./src/style.css" />
 </head>
-<body>
+<body class="bg-[#FFFDF7] text-black antialiased selection:bg-[#FFE600] selection:text-black font-['Cairo']">
 
   <!-- =========================================================================
-       Navigation Header
+       شريط التنبيه والإعلان العلوي المتحرك
        ========================================================================= -->
-  <header class="site-header" role="banner">
-    <div class="container nav-wrap">
-      <a href="#" class="brand-lockup" aria-label="Enterprise Asset OS Home">
-        <div class="brand-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-            <polyline points="2 17 12 22 22 17"></polyline>
-            <polyline points="2 12 12 17 22 12"></polyline>
-          </svg>
+  <aside class="bg-[#FFE600] text-black font-black uppercase py-2.5 border-b-3 border-black text-xs sm:text-sm tracking-wide overflow-hidden select-none" aria-label="شريط الإعلانات الترويجي">
+    <div class="animate-marquee flex items-center whitespace-nowrap gap-8 font-['Cairo'] font-black">
+      <span>★ عزل تام بنسبة 100% لمخرجات STDOUT</span>
+      <span>★ وداعاً لانهيارات اتصال الذكاء الاصطناعي الصامتة</span>
+      <span>★ 400 جنيه مصري فقط مدى الحياة</span>
+      <span>★ متوافق ومختبر على 6 بيئات عمل (Cursor, Claude, Antigravity)</span>
+      <span>★ توقيع رسمي: البرمجة بالبلدي (Programming Bel-Balady)</span>
+      <span>★ عزل تام بنسبة 100% لمخرجات STDOUT</span>
+      <span>★ وداعاً لانهيارات اتصال الذكاء الاصطناعي الصامتة</span>
+      <span>★ 400 جنيه مصري فقط مدى الحياة</span>
+      <span>★ متوافق ومختبر على 6 بيئات عمل (Cursor, Claude, Antigravity)</span>
+      <span>★ توقيع رسمي: البرمجة بالبلدي (Programming Bel-Balady)</span>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       شريط التنقل والترويسة الرئيسية (Navbar)
+       ========================================================================= -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-4 border-black shadow-[0_4px_0_0_#000]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- شعار البرمجة بالبلدي -->
+      <a href="#hero" class="flex items-center gap-3 shrink-0 group focus:outline-none focus-visible:ring-4 focus-visible:ring-black rounded-xl">
+        <div class="w-12 h-12 rounded-2xl bg-[#FFE600] border-3 border-black flex items-center justify-center font-black text-2xl text-black shadow-[3px_3px_0px_0px_#000] group-hover:translate-x-0.5 group-hover:translate-y-0.5 group-hover:shadow-[1px_1px_0px_0px_#000] transition-all">
+          ب
         </div>
-        <span>Enterprise Asset OS</span>
+        <div class="flex flex-col text-right">
+          <span class="font-black text-xl text-black leading-tight whitespace-nowrap flex items-center gap-1.5">
+            البرمجة بالبلدي
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#00F59B] border border-black"></span>
+          </span>
+          <span class="text-xs font-bold text-slate-700 font-mono tracking-wide" dir="ltr">Enterprise Asset OS</span>
+        </div>
       </a>
 
-      <nav class="nav-menu" aria-label="Primary Navigation">
-        <a href="#features" class="nav-link">Features</a>
-        <a href="#simulator" class="nav-link">Live Terminal</a>
-        <a href="#hosts" class="nav-link">Compatibility</a>
-        <a href="#extending" class="nav-link">Connectors</a>
-        <a href="#verification" class="nav-link">Proof Matrix</a>
-        <a href="#pricing" class="nav-link">Pricing</a>
-        <a href="#faq" class="nav-link">FAQ</a>
+      <!-- روابط القائمة للشاشات الكبيرة -->
+      <nav class="hidden xl:flex items-center gap-2 font-bold text-sm" aria-label="شريط التنقل الرئيسي">
+        <a href="#features" class="px-3 py-1.5 rounded-lg text-slate-800 hover:text-black hover:bg-[#FFE600] border-2 border-transparent hover:border-black transition-all">المميزات</a>
+        <a href="#simulator" class="px-3 py-1.5 rounded-lg text-slate-800 hover:text-black hover:bg-[#00C2FF] border-2 border-transparent hover:border-black transition-all">وحدة المحاكاة</a>
+        <a href="#hosts" class="px-3 py-1.5 rounded-lg text-slate-800 hover:text-black hover:bg-[#00F59B] border-2 border-transparent hover:border-black transition-all">المنصات الست</a>
+        <a href="#nutrition" class="px-3 py-1.5 rounded-lg text-slate-800 hover:text-black hover:bg-[#FFE600] border-2 border-transparent hover:border-black transition-all">المواصفات الفنية</a>
+        <a href="#pricing" class="px-3 py-1.5 rounded-lg text-slate-800 hover:text-black hover:bg-[#FF007A] hover:text-white border-2 border-transparent hover:border-black transition-all">الترخيص (400 ج.م)</a>
+        <a href="#faq" class="px-3 py-1.5 rounded-lg text-slate-800 hover:text-black hover:bg-slate-100 border-2 border-transparent hover:border-black transition-all">الأسئلة الشائعة</a>
       </nav>
 
-      <div class="nav-actions">
-        <div class="status-badge" title="Live status check">
-          <span class="status-dot"></span>
-          <span>6/6 Hosts Verified</span>
-        </div>
-        <a href="#pricing" class="btn btn-primary btn-sm">Get License ($49)</a>
+      <!-- أزرار الإجراء والتحكم -->
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="#pricing" class="neo-btn inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-sm font-black text-black bg-[#FFE600] shadow-[3px_3px_0px_0px_#000] whitespace-nowrap">
+          شراء المشروع (400 ج.م)
+        </a>
+        <button id="mobile-menu-btn" class="xl:hidden p-2 rounded-xl border-3 border-black bg-white shadow-[3px_3px_0px_0px_#000] focus:outline-none" aria-label="فتح وإغلاق القائمة" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
+    </div>
+
+    <!-- القائمة المنسدلة للشاشات الصغيرة -->
+    <div id="mobile-menu" class="hidden xl:hidden border-t-3 border-black bg-white px-5 py-4 flex flex-col gap-2 font-bold text-sm">
+      <a href="#features" class="p-2.5 rounded-lg hover:bg-[#FFE600] border-2 border-transparent hover:border-black">المميزات الهندسية</a>
+      <a href="#simulator" class="p-2.5 rounded-lg hover:bg-[#00C2FF] border-2 border-transparent hover:border-black">وحدة المحاكاة الحية</a>
+      <a href="#hosts" class="p-2.5 rounded-lg hover:bg-[#00F59B] border-2 border-transparent hover:border-black">المنصات الست (6 AI Hosts)</a>
+      <a href="#nutrition" class="p-2.5 rounded-lg hover:bg-[#FFE600] border-2 border-transparent hover:border-black">المواصفات الفنية</a>
+      <a href="#pricing" class="p-2.5 rounded-lg bg-[#FFE600] border-2 border-black">شراء المشروع (400 ج.م)</a>
+      <a href="#faq" class="p-2.5 rounded-lg hover:bg-slate-100 border-2 border-transparent hover:border-black">الأسئلة الشائعة</a>
     </div>
   </header>
 
   <main>
     <!-- =========================================================================
-         Hero Section
+         القسم البطولي الرئيسي (Hero Section)
          ========================================================================= -->
-    <section class="hero-section" id="hero">
-      <div class="container">
-        <div class="pill-announcement">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+    <section class="relative px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-10 pb-16 text-center" id="hero">
+      
+      <!-- شارات ترويجية مائلة عالية الطاقة -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
+        <span class="inline-block -rotate-1 bg-[#FFE600] border-3 border-black text-black font-black text-xs sm:text-sm px-4 py-1.5 rounded-full shadow-[3px_3px_0px_0px_#000]">
+          ⚡ مواصفات 2026-07-28 القياسية
+        </span>
+        <span class="inline-block rotate-1 bg-[#00F59B] border-3 border-black text-black font-black text-xs sm:text-sm px-4 py-1.5 rounded-full shadow-[3px_3px_0px_0px_#000]">
+          🛡️ عزل تام لمخرجات Stdout بنسبة 100%
+        </span>
+        <span class="inline-block -rotate-1 bg-[#FF007A] border-3 border-black text-white font-black text-xs sm:text-sm px-4 py-1.5 rounded-full shadow-[3px_3px_0px_0px_#000]">
+          💰 400 جنية مصري فقط مدى الحياة
+        </span>
+      </div>
+
+      <!-- العنوان الرئيسي الرنان بضبط المسافات والأسطر -->
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-black leading-[1.25] max-w-4xl mx-auto">
+        خادم بروتوكول <span dir="ltr" class="font-mono inline-block">MCP</span> الأكثر صلابة وموثوقية
+        <span class="block mt-2">
+          <span class="inline-block bg-[#00C2FF] text-black px-5 py-1.5 border-4 border-black shadow-[6px_6px_0px_0px_#000] -rotate-1">
+            بلمسة البرمجة بالبلدي!
+          </span>
+        </span>
+      </h1>
+
+      <!-- النص التوضيحي الرصين -->
+      <p class="mt-6 text-base sm:text-lg text-slate-800 max-w-2xl mx-auto font-medium leading-relaxed">
+        توقف عن إضاعة الساعات في تصحيح أخطاء الانهيار الصامت لمصافحة JSON-RPC عند ربط الذكاء الاصطناعي. 
+        انشر خادماً برمجياً مؤسسياً معتمداً ومختبراً في بيئات العمل الحقيقية خلال أقل من <strong>5 دقائق</strong>.
+      </p>
+
+      <!-- أزرار الإجراءات الرئيسية -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="#pricing" class="neo-btn inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-black text-base sm:text-lg text-black bg-[#FFE600] shadow-[5px_5px_0px_0px_#000]">
+          <span>امتلك المشروع بالكامل — 400 ج.م</span>
+          <span class="font-mono text-xl">←</span>
+        </a>
+
+        <a href="#simulator" class="neo-btn inline-flex items-center gap-2 px-6 py-4 rounded-2xl font-black text-base text-black bg-white shadow-[4px_4px_0px_0px_#000]">
+          <span>وحدة المحاكاة الحية</span>
+        </a>
+
+        <a href="https://github.com/s7so/enterprise-asset-os" target="_blank" rel="noopener noreferrer" class="neo-btn inline-flex items-center gap-2 px-6 py-4 rounded-2xl font-black text-base text-black bg-[#00F59B] shadow-[4px_4px_0px_0px_#000]">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
           </svg>
-          <span>Spec 2026-07-28 Baseline · FastMCP 4.x · 100% Stdout Isolated</span>
-        </div>
+          <span>مستودع GitHub</span>
+        </a>
+      </div>
 
-        <h1 class="hero-title">
-          The Production-Grade MCP Server <span class="gradient-text">for Enterprise AI</span>
-        </h1>
-
-        <p class="hero-subtitle">
-          Stop wasting 40+ hours debugging JSON-RPC transport crashes, broken handshakes, and fragmented host configurations. Deploy hardened, host-tested Model Context Protocol servers in minutes.
-        </p>
-
-        <div class="hero-cta-group">
-          <a href="#pricing" class="btn btn-primary">
-            <span>Get Instant Access — $49</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </a>
-          <a href="https://github.com/s7so/enterprise-asset-os" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-            </svg>
-            <span>GitHub Repository</span>
-          </a>
-          <a href="#simulator" class="btn btn-outline">
-            <span>Test Simulator</span>
-          </a>
-        </div>
-
-        <!-- =====================================================================
-             Interactive Live MCP Terminal Sandbox
-             ===================================================================== -->
-        <div class="terminal-wrapper" id="simulator" aria-label="Live MCP Protocol Sandbox">
-          <div class="terminal-header">
-            <div class="terminal-dots" aria-hidden="true">
-              <span class="dot dot-red"></span>
-              <span class="dot dot-yellow"></span>
-              <span class="dot dot-green"></span>
+      <!-- =====================================================================
+           عرض المنتج ثلاثي الأبعاد + وحدة محاكاة بروتوكول MCP الحية
+           ===================================================================== -->
+      <div class="mt-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch text-right">
+        
+        <!-- يمين: كبسولة خادم البرمجة بالبلدي ثلاثية الأبعاد -->
+        <div class="lg:col-span-5 flex flex-col">
+          <div class="relative neo-card p-5 bg-white border-4 border-black shadow-[8px_8px_0px_0px_#000] rounded-3xl h-full flex flex-col justify-between">
+            <div class="absolute -top-3.5 -right-3 z-10 bg-[#FFE600] text-black font-black text-xs sm:text-sm px-4 py-1 rounded-full border-3 border-black shadow-[2px_2px_0px_0px_#000] rotate-2">
+              ⚡ إصدار 400 جنية مصري
             </div>
-            <div class="terminal-title">mcp-bridge://enterprise-asset-os/stdio-inspector</div>
-            <div class="terminal-latency">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-              <span id="terminal-latency-val">14ms</span>
+            
+            <div class="overflow-hidden rounded-2xl border-3 border-black bg-amber-50 aspect-[4/3] flex items-center justify-center">
+              <img src="./images/hero-product.jpg" alt="كبسولة نظام التشغيل البرمجة بالبلدي Enterprise Asset OS" class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105" loading="eager" width="800" height="600" />
+            </div>
+
+            <div class="mt-4 pt-3 border-t-3 border-black flex items-center justify-between">
+              <div>
+                <span class="block font-black text-base text-black leading-tight">نواة التشغيل المؤسسية v4.0</span>
+                <span class="text-xs font-bold text-slate-600 font-mono" dir="ltr">FastMCP 4 · Python SDK</span>
+              </div>
+              <span class="px-3 py-1 rounded-xl bg-[#00F59B] border-2 border-black font-black text-xs text-black shadow-[2px_2px_0px_0px_#000]">
+                حماية 100%
+              </span>
             </div>
           </div>
+        </div>
 
-          <div class="terminal-controls">
-            <span class="control-label">Live Triggers:</span>
-            <button class="pill-btn active" id="btn-query-01">Query server-01 (Healthy)</button>
-            <button class="pill-btn" id="btn-query-02">Query server-02 (Degraded)</button>
-            <button class="pill-btn" id="btn-query-inject">Security Injection Test</button>
-            <button class="pill-btn active" id="btn-toggle-stdout" style="margin-left: auto;">Stdout Isolation: ON (Guaranteed)</button>
+        <!-- يسار: وحدة المحاكاة الحية للبروتوكول -->
+        <div class="lg:col-span-7 neo-card bg-[#FFFDF7] overflow-hidden flex flex-col justify-between border-4 border-black shadow-[8px_8px_0px_0px_#000]" id="simulator">
+          
+          <!-- شريط ترويسة الطرفية -->
+          <div class="px-4 py-3 bg-black border-b-4 border-black flex items-center justify-between gap-3 text-white">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#FF007A] border border-white"></span>
+              <span class="w-3 h-3 rounded-full bg-[#FFE600] border border-white"></span>
+              <span class="w-3 h-3 rounded-full bg-[#00F59B] border border-white"></span>
+            </div>
+            <div class="font-mono text-xs font-bold tracking-wider text-slate-200 truncate" dir="ltr">
+              mcp-bridge://belbalady-asset-os/stdio-inspector
+            </div>
+            <div id="terminal-latency-val" class="px-2.5 py-0.5 rounded bg-[#00F59B] border-2 border-black text-black font-black text-xs shrink-0">
+              السرعة: 14ms
+            </div>
           </div>
 
-          <div class="terminal-body" id="terminal-body" role="region" aria-live="polite">
-            <!-- Simulated via app.js -->
+          <!-- شريط أزرار التحكم في الاختبارات -->
+          <div class="px-4 py-2.5 bg-[#FFE600] border-b-4 border-black flex flex-wrap items-center gap-2 text-xs">
+            <span class="font-black text-black shrink-0">أوامر الاختبار:</span>
+            <button class="neo-btn px-3 py-1 rounded-lg font-black text-xs bg-[#FFE600] text-black shadow-[2px_2px_0px_0px_#000]" id="btn-query-01">فحص خادم 1 (سليم)</button>
+            <button class="neo-btn px-3 py-1 rounded-lg font-black text-xs bg-white text-slate-800 shadow-[2px_2px_0px_0px_#000]" id="btn-query-02">فحص خادم 2 (متراجع)</button>
+            <button class="neo-btn px-3 py-1 rounded-lg font-black text-xs bg-white text-slate-800 shadow-[2px_2px_0px_0px_#000]" id="btn-query-inject">اختبار الأمان</button>
+            <button class="ms-auto neo-btn px-3 py-1 rounded-lg font-black text-xs bg-[#00F59B] text-black shadow-[2px_2px_0px_0px_#000]" id="btn-toggle-stdout">عزل Stdout: مفعل (مضمون 100%)</button>
+          </div>
+
+          <!-- مجرى نصوص الطرفية المباشر -->
+          <div class="p-4 bg-white min-h-[220px] max-h-[340px] overflow-y-auto space-y-2 flex-1" id="terminal-body" role="region" aria-live="polite">
+            <!-- يتم تحديث المحتوى تلقائياً عبر app.js -->
           </div>
         </div>
+
       </div>
     </section>
 
     <!-- =========================================================================
-         Problem vs. Solution Comparator ("The 4 Silent Killers of MCP")
+         شريط التمرير الدائري الفاصل (Marquee Divider)
          ========================================================================= -->
-    <section class="section-padding" id="features">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-eyebrow">Architectural Superiority</div>
-          <h2 class="section-title">The 4 Hidden Traps of MCP Servers in Production</h2>
-          <p class="section-desc">Why 95% of open-source MCP scripts fail during actual deployment, and how Enterprise Asset OS solves each point of failure.</p>
+    <div class="bg-[#00C2FF] border-y-4 border-black overflow-hidden py-3 text-black font-black text-base sm:text-lg select-none shadow-[0_6px_0_0_#000]">
+      <div class="animate-marquee flex items-center whitespace-nowrap gap-8 font-black">
+        <span>⚡ موثوقية بنسبة 100%</span>
+        <span>★ مبني بأحدث معايير FastMCP</span>
+        <span>★ 0% تلوث في قنوات البيانات</span>
+        <span>★ يعمل بنقاء تام على بايثون Python 3.12</span>
+        <span>★ 400 جنيه مصري استثمار لمرة واحدة مدى الحياة</span>
+        <span>★ معتمد لـ Cursor و Claude و Antigravity</span>
+        <span>★ توقيع رسمي: البرمجة بالبلدي</span>
+        <span>⚡ موثوقية بنسبة 100%</span>
+        <span>★ مبني بأحدث معايير FastMCP</span>
+        <span>★ 0% تلوث في قنوات البيانات</span>
+        <span>★ يعمل بنقاء تام على بايثون Python 3.12</span>
+        <span>★ 400 جنيه مصري استثمار لمرة واحدة مدى الحياة</span>
+        <span>★ معتمد لـ Cursor و Claude و Antigravity</span>
+        <span>★ توقيع رسمي: البرمجة بالبلدي</span>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         المشكلة مقابل الحل ("الفخاخ الأربعة لخوادم بروتوكول MCP")
+         ========================================================================= -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" id="features">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="inline-block bg-[#FF007A] text-white font-black text-xs sm:text-sm px-4 py-1 rounded-full border-3 border-black shadow-[3px_3px_0px_0px_#000] mb-3">
+          احذر من الأكواد غير الموثوقة!
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black text-black">الفخاخ الأربعة القاتلة في خوادم <span dir="ltr" class="font-mono">MCP</span></h2>
+        <p class="mt-3 text-slate-800 text-base sm:text-lg font-medium">لماذا تنهار 95% من أكواد MCP المكتوبة يدويًا أو المولدة بالذكاء الاصطناعي في بيئات العمل الحقيقية، وكيف يقضي هذا المشروع على كل نقطة ضعف جذريًا.</p>
+      </div>
+
+      <!-- بطاقة روبوت الحماية المميزة (Bel-Balady Safeguard Bot) -->
+      <div class="mb-10 neo-card p-6 sm:p-8 bg-[#FFE600] border-4 border-black shadow-[8px_8px_0px_0px_#000] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-right">
+        
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-[280px] rounded-3xl overflow-hidden border-4 border-black shadow-[6px_6px_0px_0px_#000] bg-white group aspect-square">
+            <img src="./images/mascot-shield.jpg" alt="روبوت الحماية النشط لمنصة البرمجة بالبلدي" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105" loading="lazy" width="600" height="600" />
+            <div class="absolute -bottom-1 inset-x-0 bg-black text-white text-center py-2 font-black text-xs tracking-wider">
+              ★ روبوت الحماية النشط — البرمجة بالبلدي ★
+            </div>
+          </div>
         </div>
 
-        <div class="comparator-grid">
-          <!-- Trap 1 -->
-          <article class="card card-bad">
-            <div class="card-badge badge-bad">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-              <span>The Typical MCP Failure</span>
-            </div>
-            <h3 class="card-title">Stdout Poisoning Disconnects</h3>
-            <p class="card-text">A single debug <code>print()</code> statement or third-party database driver log pollutes <code>stdout</code>, breaking the JSON-RPC framing and causing Claude or Cursor to crash silently.</p>
-          </article>
-
-          <!-- Solution 1 -->
-          <article class="card card-good">
-            <div class="card-badge badge-good">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>Enterprise Asset OS Guarantee</span>
-            </div>
-            <h3 class="card-title">100% Guaranteed Stdout Isolation</h3>
-            <p class="card-text">All framework telemetry and diagnostic logs are strictly isolated to <code>stderr</code>. <code>stdout</code> is reserved 100% exclusively for pristine UTF-8 JSON-RPC 2.0 frames.</p>
-          </article>
-
-          <!-- Trap 2 -->
-          <article class="card card-bad">
-            <div class="card-badge badge-bad">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-              <span>The Typical MCP Failure</span>
-            </div>
-            <h3 class="card-title">Stateful Session Lock-In</h3>
-            <p class="card-text">Legacy servers rely on stateful handshakes and sticky <code>Mcp-Session-Id</code> headers, making horizontal cloud scaling across Kubernetes or AWS ECS impossible.</p>
-          </article>
-
-          <!-- Solution 2 -->
-          <article class="card card-good">
-            <div class="card-badge badge-good">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>Enterprise Asset OS Guarantee</span>
-            </div>
-            <h3 class="card-title">2026-07-28 Stateless Baseline</h3>
-            <p class="card-text">Completely stateless execution. Requests carry self-contained metadata in <code>_meta</code>. Any replica behind a round-robin load balancer can fulfill any tool request instantly.</p>
-          </article>
+        <div class="lg:col-span-7 space-y-3.5">
+          <span class="inline-block bg-white text-black font-black text-xs sm:text-sm px-4 py-1 rounded-full border-3 border-black shadow-[2px_2px_0px_0px_#000]">
+            نظام الدفاع الفعال لقنوات الاتصال
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-black text-black leading-tight">
+            امنع أي أمر طباعة عشوائي من تدمير جلسة عمل الذكاء الاصطناعي
+          </h3>
+          <p class="text-slate-950 font-bold text-sm sm:text-base leading-relaxed">
+            في خوادم MCP المعتادة، يكفي أمر طباعة واحد عشوائي <code dir="ltr" class="bg-white px-1.5 py-0.5 rounded border border-black">print()</code> أو رسالة تشخيصية غير منضبطة لتلويث قناة <code dir="ltr">stdout</code>، مما يكسر محلل JSON-RPC فوراً ويتسبب في قطع اتصال Claude Desktop و Cursor و Antigravity بدون أي رسالة خطأ واضحة.
+          </p>
+          <p class="text-slate-900 font-medium text-xs sm:text-sm leading-relaxed">
+            يعيد نظام Enterprise Asset OS توجيه 100% من السجلات والبيانات التشخيصية حصرياً إلى قناة <code dir="ltr">stderr</code>، مبقياً قناة <code dir="ltr">stdout</code> مكرسة لنقل إطارات JSON-RPC النقية 100%.
+          </p>
+          <div class="flex flex-wrap gap-2.5 pt-2 font-bold text-xs">
+            <span class="px-3 py-1.5 rounded-xl bg-white border-2 border-black shadow-[2px_2px_0px_0px_#000]">🛡️ عزل تام لمخرجات Stdout</span>
+            <span class="px-3 py-1.5 rounded-xl bg-[#00F59B] border-2 border-black text-black shadow-[2px_2px_0px_0px_#000]">⚡ صفر انقطاعات في الاتصال</span>
+            <span class="px-3 py-1.5 rounded-xl bg-[#00C2FF] border-2 border-black text-black shadow-[2px_2px_0px_0px_#000]">🔒 فحص مدخلات صارم عبر Regex</span>
+          </div>
         </div>
+      </div>
+
+      <!-- شبكة مقارنة الفخاخ والحلول -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-right items-stretch">
+        
+        <!-- فخ 1 -->
+        <article class="neo-card p-6 bg-[#FFF5F8] border-4 border-black shadow-[6px_6px_0px_0px_#000] flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#FF007A] text-white border-2 border-black text-xs font-black mb-3 shadow-[2px_2px_0px_0px_#000]">
+              <span>❌ الانهيار الشائع في أكواد MCP</span>
+            </div>
+            <h3 class="text-xl font-black text-black mb-2">تلوث مخرجات Stdout وانهيار الاتصال</h3>
+            <p class="text-sm text-slate-800 leading-relaxed font-medium">أمر طباعة تجريبي وحيد أو مكتبة قاعدة بيانات تطبع في <code dir="ltr">stdout</code>، يؤدي فوراً إلى تدمير مصفوفة JSON-RPC وقطع الاتصال فجأة دون أن يدري المطور سبب المشكلة.</p>
+          </div>
+        </article>
+
+        <!-- حل 1 -->
+        <article class="neo-card p-6 bg-[#F0FFF9] border-4 border-black shadow-[6px_6px_0px_0px_#000] flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#00F59B] text-black border-2 border-black text-xs font-black mb-3 shadow-[2px_2px_0px_0px_#000]">
+              <span>✓ ضمان البرمجة بالبلدي</span>
+            </div>
+            <h3 class="text-xl font-black text-black mb-2">عزل تام ومضمون 100% للمخرجات</h3>
+            <p class="text-sm text-slate-800 leading-relaxed font-medium">كافة السجلات والرسائل التشخيصية وملاحظات المكتبات يتم توجيهها بصرامة إلى <code dir="ltr">stderr</code>، بينما تظل قناة <code dir="ltr">stdout</code> مخصصة حصرياً لمعاملات بروتوكول JSON-RPC 2.0.</p>
+          </div>
+        </article>
+
+        <!-- فخ 2 -->
+        <article class="neo-card p-6 bg-[#FFF5F8] border-4 border-black shadow-[6px_6px_0px_0px_#000] flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#FF007A] text-white border-2 border-black text-xs font-black mb-3 shadow-[2px_2px_0px_0px_#000]">
+              <span>❌ الانهيار الشائع في أكواد MCP</span>
+            </div>
+            <h3 class="text-xl font-black text-black mb-2">التعلق بالجلسات (Session Lock-In)</h3>
+            <p class="text-sm text-slate-800 leading-relaxed font-medium">اعتماد الخوادم القديمة على تفاوض الجلسات ورؤوس الهيدر المعقدة، مما يجعل التوسع السحابي عبر حاويات Docker أو مجموعات Kubernetes مستحيلاً دون تعقيدات Redis Sticky Sessions.</p>
+          </div>
+        </article>
+
+        <!-- حل 2 -->
+        <article class="neo-card p-6 bg-[#F0FFF9] border-4 border-black shadow-[6px_6px_0px_0px_#000] flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#00F59B] text-black border-2 border-black text-xs font-black mb-3 shadow-[2px_2px_0px_0px_#000]">
+              <span>✓ ضمان البرمجة بالبلدي</span>
+            </div>
+            <h3 class="text-xl font-black text-black mb-2">تصميم عديم الحالة (Stateless 2026)</h3>
+            <p class="text-sm text-slate-800 leading-relaxed font-medium">صفر اعتماد على الجلسات الثابتة. كل طلب يحمل بياناته الذاتية داخل <code dir="ltr">_meta</code>، مما يتيح لأي نسخة طبق الأصل من خادمك خلف موازن الأحمال تلبية الطلب فوراً وبسرعة البرق.</p>
+          </div>
+        </article>
+
       </div>
     </section>
 
     <!-- =========================================================================
-         Multi-Host Profile Switcher
+         محول إعدادات منصات الذكاء الاصطناعي الست (6 AI Hosts)
          ========================================================================= -->
-    <section class="section-padding" id="hosts" style="background: rgba(11, 17, 32, 0.4);">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-eyebrow">Zero-Configuration Deployment</div>
-          <h2 class="section-title">Tested & Pre-Configured for 6 AI Hosts</h2>
-          <p class="section-desc">No guessing file paths or configuration schemas. Copy the exact verified configuration for your environment.</p>
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FFE600] border-y-4 border-black" id="hosts">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="text-center max-w-3xl mx-auto mb-10">
+          <span class="inline-block bg-white text-black font-black text-xs sm:text-sm px-4 py-1.5 rounded-full border-3 border-black shadow-[3px_3px_0px_0px_#000] mb-3">
+            تشغيل مباشر بنقرة واحدة
+          </span>
+          <h2 class="text-3xl sm:text-5xl font-black text-black">مُهيأ ومختبر للعمل مع 6 بيئات ذكاء اصطناعي</h2>
+          <p class="mt-2 text-slate-900 text-base sm:text-lg font-bold">اختر منصة العمل المفضلة لديك، وانسخ كود التهيئة المعتمد وضعه مباشرة في ملف إعداداتك.</p>
         </div>
 
-        <div class="host-switcher-box">
-          <div class="host-tabs" role="tablist" aria-label="Host configuration tabs">
-            <button class="host-tab-btn active" role="tab" aria-selected="true" data-host="antigravity">Antigravity IDE & 2.0</button>
-            <button class="host-tab-btn" role="tab" aria-selected="false" data-host="cursor">Cursor IDE</button>
-            <button class="host-tab-btn" role="tab" aria-selected="false" data-host="vscode">Visual Studio Code</button>
-            <button class="host-tab-btn" role="tab" aria-selected="false" data-host="claude">Claude Desktop</button>
-            <button class="host-tab-btn" role="tab" aria-selected="false" data-host="windsurf">Windsurf</button>
-            <button class="host-tab-btn" role="tab" aria-selected="false" data-host="docker">Docker Microservice</button>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch text-right">
+          
+          <!-- يمين: صورة مركز تحكم الذكاء الاصطناعي للبرمجة بالبلدي -->
+          <div class="lg:col-span-5 flex flex-col">
+            <div class="relative neo-card p-5 bg-white border-4 border-black shadow-[8px_8px_0px_0px_#000] rounded-3xl h-full flex flex-col justify-between">
+              <div class="absolute -top-3.5 right-4 bg-[#FF007A] text-white font-black text-xs px-3.5 py-1 rounded-full border-2 border-black shadow-[2px_2px_0px_0px_#000] rotate-2">
+                ★ مركز تحكم الذكاء الاصطناعي الشامل ★
+              </div>
+              <div class="overflow-hidden rounded-2xl border-3 border-black bg-purple-900 aspect-square flex items-center justify-center">
+                <img src="./images/host-hub.jpg" alt="منصة تحكم وتكامل بيئات الذكاء الاصطناعي لمنصة البرمجة بالبلدي" class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105" loading="lazy" width="600" height="600" />
+              </div>
+              <div class="mt-4 pt-3 border-t-3 border-black flex items-center justify-between">
+                <span class="font-black text-sm text-black">بروتوكول موحد لكافة المنصات</span>
+                <span class="px-2.5 py-0.5 rounded-lg bg-[#00C2FF] border-2 border-black font-black text-xs text-black">
+                  6 بيئات معتمدة
+                </span>
+              </div>
+            </div>
           </div>
 
-          <div class="host-code-wrap">
-            <button class="code-copy-btn" id="copy-host-btn" aria-label="Copy code configuration">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span>Copy Config</span>
-            </button>
-            <pre class="host-code-block"><code id="host-code-display">{
+          <!-- يسار: تبويبات المنصات وعرض أكواد التهيئة الجاهزة مع شريط علوي نظيف لزر النسخ -->
+          <div class="lg:col-span-7 neo-card overflow-hidden bg-white border-4 border-black shadow-[8px_8px_0px_0px_#000] flex flex-col justify-between">
+            
+            <!-- تبويبات أسماء المنصات -->
+            <div class="flex flex-wrap items-center gap-2 p-3 bg-slate-100 border-b-4 border-black" role="tablist" aria-label="تبويبات المنصات المدعومة">
+              <button class="host-tab-btn neo-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black bg-[#00C2FF] text-black shadow-[2px_2px_0px_0px_#000]" role="tab" aria-selected="true" data-host="antigravity">Antigravity</button>
+              <button class="host-tab-btn neo-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black bg-white text-black shadow-[2px_2px_0px_0px_#000]" role="tab" aria-selected="false" data-host="cursor">Cursor IDE</button>
+              <button class="host-tab-btn neo-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black bg-white text-black shadow-[2px_2px_0px_0px_#000]" role="tab" aria-selected="false" data-host="vscode">VS Code</button>
+              <button class="host-tab-btn neo-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black bg-white text-black shadow-[2px_2px_0px_0px_#000]" role="tab" aria-selected="false" data-host="claude">Claude Desktop</button>
+              <button class="host-tab-btn neo-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black bg-white text-black shadow-[2px_2px_0px_0px_#000]" role="tab" aria-selected="false" data-host="windsurf">Windsurf</button>
+              <button class="host-tab-btn neo-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black bg-white text-black shadow-[2px_2px_0px_0px_#000]" role="tab" aria-selected="false" data-host="docker">Docker</button>
+            </div>
+
+            <!-- شريط تحكم الكود مع زر النسخ (مستقل ونظيف بدون تداخل) -->
+            <div class="px-4 py-2.5 bg-slate-900 border-b-2 border-black flex items-center justify-between text-xs font-mono">
+              <span class="text-slate-400 font-bold" dir="ltr">configuration-manifest.json</span>
+              <button id="copy-host-btn" class="neo-btn inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-black font-['Cairo'] bg-[#FFE600] text-black shadow-[2px_2px_0px_0px_#000]">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>نسخ الإعداد (Copy)</span>
+              </button>
+            </div>
+
+            <!-- نافذة عرض الكود المجهزة -->
+            <div class="p-5 bg-slate-950 font-mono text-xs sm:text-sm leading-relaxed text-emerald-300 overflow-x-auto flex-1 min-h-[200px]" dir="ltr">
+              <pre><code id="host-code-display">{
   "mcpServers": {
     "enterprise-asset-os": {
       "command": "uv",
@@ -232,304 +405,261 @@
     }
   }
 }</code></pre>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
 
     <!-- =========================================================================
-         Extensibility & Database Connectors
+         بطاقة الحقائق التقنية المضمونة ودليل التوسعة (Tech Nutrition Facts)
          ========================================================================= -->
-    <section class="section-padding" id="extending">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-eyebrow">Production Customization</div>
-          <h2 class="section-title">Connect Any Database in Under 5 Minutes</h2>
-          <p class="section-desc">Designed as a modular starter kit. Replace sample metrics with production PostgreSQL, Redis, or proprietary REST APIs using copy-paste patterns from <code>EXTENDING.md</code>.</p>
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto" id="nutrition">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start text-right">
+        
+        <!-- يمين: جدول معايير الجودة والحقائق التقنية بالبلدي -->
+        <div class="lg:col-span-5 neo-card p-6 bg-white border-4 border-black shadow-[8px_8px_0px_0px_#000]">
+          <div class="border-b-8 border-black pb-2 mb-3">
+            <h3 class="text-2xl sm:text-3xl font-black text-black">بطاقة الحقائق التقنية المضمونة</h3>
+            <div class="text-xs font-bold text-slate-700 mt-1">حجم الحصة: 1 خادم بروتوكول MCP مؤسسي متكامل</div>
+          </div>
+
+          <div class="border-b-4 border-black pb-1 mb-2 text-xs flex justify-between font-bold">
+            <span>المعيار الهندسي لكل حصة</span>
+            <span>القيمة اليومية المضمونة*</span>
+          </div>
+
+          <div class="space-y-2 text-xs divide-y-2 divide-black">
+            <div class="flex justify-between pt-1.5">
+              <span class="font-bold">نقاء مخرجات Stdout من أي تلوث</span>
+              <span class="font-black text-emerald-600 font-mono">100%</span>
+            </div>
+            <div class="flex justify-between pt-1.5">
+              <span class="font-bold">شوائب وسكر أوامر print() العشوائية</span>
+              <span class="font-black text-emerald-600 font-mono">0g (0%)</span>
+            </div>
+            <div class="flex justify-between pt-1.5">
+              <span class="font-bold">سرعة إقلاع بايثون عبر مكتبة uv</span>
+              <span class="font-black text-cyan-600 font-mono">&lt; 38ms</span>
+            </div>
+            <div class="flex justify-between pt-1.5">
+              <span class="font-bold">التوافق مع منصات الذكاء الاصطناعي</span>
+              <span class="font-black text-emerald-600 font-mono">6 / 6 (100%)</span>
+            </div>
+            <div class="flex justify-between pt-1.5">
+              <span class="font-bold">الجاهزية للتوسع السحابي (Docker/K8s)</span>
+              <span class="font-black">جاهز بنسبة 100%</span>
+            </div>
+            <div class="flex justify-between pt-1.5">
+              <span class="font-bold">شحوم أو شوائب بيئات NodeJS</span>
+              <span class="font-black text-emerald-600">0% (بايثون خالص وخفيف)</span>
+            </div>
+            <div class="flex justify-between pt-2 border-t-4 border-black font-black text-sm">
+              <span>سعر ترخيص الملكية مدى الحياة</span>
+              <span class="bg-[#FFE600] px-2 py-0.5 border-2 border-black">400 جنية مصري فقط</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-t-2 border-black text-[11px] text-slate-600 leading-normal">
+            * تم احتساب القيم بناءً على معايير مهندسي الموثوقية SRE لضمان صفر توقف، ونقل بيانات JSON-RPC دون انقطاع، وإنتاجية برمجية فورية.
+          </div>
         </div>
 
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon-box">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">PostgreSQL (asyncpg)</h3>
-            <p class="feature-desc">Asynchronous connection pooling with parameterized SQL execution and automatic connection lifecycle hooks.</p>
+        <!-- يسار: دليل ربط قواعد البيانات خلال 5 دقائق -->
+        <div class="lg:col-span-7 flex flex-col gap-4">
+          <div>
+            <span class="inline-block bg-[#00C2FF] text-black font-black text-xs sm:text-sm px-4 py-1 rounded-full border-3 border-black shadow-[2px_2px_0px_0px_#000] mb-2">
+              توسعة وتخصيص فوري
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-black text-black">اربط أي قاعدة بيانات في أقل من 5 دقائق</h2>
+            <p class="mt-2 text-slate-800 font-medium text-sm sm:text-base leading-relaxed">استبدل البيانات التجريبية بقواعد بياناتك الحقيقية مثل PostgreSQL أو Redis أو واجهات REST البرمجية باستخدام الأمثلة الجاهزة داخل ملف <code dir="ltr" class="bg-white px-1 rounded border border-black">EXTENDING.md</code>.</p>
           </div>
 
-          <div class="feature-card">
-            <div class="feature-icon-box">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                <line x1="6" y1="18" x2="6.01" y2="18"></line>
-              </svg>
+          <div class="space-y-3.5">
+            <!-- ربط 1: PostgreSQL -->
+            <div class="neo-card p-4 bg-[#F8FAFC] border-3 border-black shadow-[4px_4px_0px_0px_#000] flex items-start gap-3.5">
+              <div class="w-11 h-11 rounded-xl bg-[#00C2FF] border-2 border-black flex items-center justify-center shrink-0 shadow-[2px_2px_0px_0px_#000]">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-base font-black text-black">ربط قواعد بيانات PostgreSQL (عبر asyncpg)</h4>
+                <p class="text-xs sm:text-sm text-slate-700 mt-0.5 leading-normal">تجمّع اتصالات غير تزامني (Async Connection Pool) مع إرجاع فوري لنتائج الاستعلامات لنماذج الذكاء الاصطناعي دون أي حجز لخيوط المعالجة.</p>
+              </div>
             </div>
-            <h3 class="feature-title">Redis Cache Layer</h3>
-            <p class="feature-desc">Microsecond latency cache lookups with configurable <code>cache_ttl</code> hints conforming to the 2026-07-28 caching spec.</p>
-          </div>
 
-          <div class="feature-card">
-            <div class="feature-icon-box">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-              </svg>
+            <!-- ربط 2: Redis -->
+            <div class="neo-card p-4 bg-[#F8FAFC] border-3 border-black shadow-[4px_4px_0px_0px_#000] flex items-start gap-3.5">
+              <div class="w-11 h-11 rounded-xl bg-[#FF007A] text-white border-2 border-black flex items-center justify-center shrink-0 shadow-[2px_2px_0px_0px_#000]">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-base font-black text-black">طبقة التخزين المؤقت السريع Redis</h4>
+                <p class="text-xs sm:text-sm text-slate-700 mt-0.5 leading-normal">تخزين واسترجاع القياسات والجلسات اللحظية بسرعات فائقة دون تكرار الاستعلامات الثقيلة، مع دعم التحديث الذاتي.</p>
+              </div>
             </div>
-            <h3 class="feature-title">Internal REST / Cloud APIs</h3>
-            <p class="feature-desc">High-throughput HTTP client integration via <code>httpx</code> for Datadog, Prometheus, CloudWatch, or custom microservices.</p>
+
+            <!-- ربط 3: REST APIs -->
+            <div class="neo-card p-4 bg-[#F8FAFC] border-3 border-black shadow-[4px_4px_0px_0px_#000] flex items-start gap-3.5">
+              <div class="w-11 h-11 rounded-xl bg-[#00F59B] text-black border-2 border-black flex items-center justify-center shrink-0 shadow-[2px_2px_0px_0px_#000]">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-base font-black text-black">واجهات REST APIs والخدمات السحابية</h4>
+                <p class="text-xs sm:text-sm text-slate-700 mt-0.5 leading-normal">تضمين عميل HTTP غير تزامني (عبر httpx) للتواصل مع بوابات الدفع والأنظمة السحابية وإرجاع البيانات للمساعد الذكي.</p>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
     </section>
 
     <!-- =========================================================================
-         Real-Host Verification Matrix
+         صندوق العرض الذهبي الموحد والتسعير (400 جنية مصري فقط)
          ========================================================================= -->
-    <section class="section-padding" id="verification">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-eyebrow">Proven Engineering</div>
-          <h2 class="section-title">Verified on Real Host Runtimes</h2>
-          <p class="section-desc">Not simulated or mocked in isolation. Enterprise Asset OS is verified directly inside running AI client environments.</p>
+    <section class="py-16 px-4 sm:px-6 lg:px-8 bg-[#FFE600] border-y-4 border-black" id="pricing">
+      <div class="max-w-4xl mx-auto text-center">
+        
+        <span class="inline-block bg-black text-white font-black text-xs sm:text-sm px-5 py-1.5 rounded-full border-2 border-black shadow-[3px_3px_0px_0px_#000] mb-3">
+          أفضل استثمار لمهندسي البرمجيات والذكاء الاصطناعي
+        </span>
+        
+        <h2 class="text-3xl sm:text-5xl font-black text-black">امتلك المشروع بالكامل الآن</h2>
+        <p class="mt-2 text-slate-900 font-bold text-base sm:text-lg max-w-xl mx-auto leading-relaxed">سعر واحد شامل ومباشر لمرة واحدة مدى الحياة بدون أي اشتراكات دورية أو رسوم خفية.</p>
+
+        <!-- بطاقة العرض الذهبي -->
+        <div class="mt-8 neo-card bg-white p-6 sm:p-10 border-4 border-black shadow-[10px_10px_0px_0px_#000] text-right">
+          
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-b-4 border-black pb-6">
+            <div>
+              <span class="px-3 py-1 rounded-full bg-[#00C2FF] border-2 border-black text-black font-black text-xs">
+                الترخيص التجاري الشامل للأبد
+              </span>
+              <h3 class="text-2xl sm:text-3xl font-black text-black mt-2 leading-tight">Enterprise Asset OS</h3>
+              <p class="text-xs sm:text-sm text-slate-700 font-bold mt-1">كود المصدر الكامل للاستخدام الشخصي وفي مشاريع عملائك التجارية بدون قيود.</p>
+            </div>
+            
+            <div class="text-center sm:text-left shrink-0 bg-[#FFE600] p-4 rounded-2xl border-3 border-black shadow-[4px_4px_0px_0px_#000] w-full sm:w-auto">
+              <div class="text-5xl font-black text-black font-mono leading-none">400</div>
+              <div class="text-xs font-black text-black mt-1">جنية مصري (400 EGP)</div>
+              <div class="text-[11px] font-bold text-slate-800">دفعة واحدة للأبد</div>
+            </div>
+          </div>
+
+          <!-- قائمة المزايا الثمانية المؤكدة بضبط اتجاه النصوص والرموز -->
+          <div class="py-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-bold text-slate-800">
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#00F59B] border-2 border-black flex items-center justify-center shrink-0 font-black text-xs">✓</span>
+              <span>كود المصدر بالكامل (<bdi dir="ltr">FastMCP 4 & Python SDK</bdi>)</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#00F59B] border-2 border-black flex items-center justify-center shrink-0 font-black text-xs">✓</span>
+              <span>تهيئة جاهزة لـ 6 بيئات ذكاء اصطناعي</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#00F59B] border-2 border-black flex items-center justify-center shrink-0 font-black text-xs">✓</span>
+              <span>عزل 100% للـ Stdout لحماية الخادم من الانهيار</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#00F59B] border-2 border-black flex items-center justify-center shrink-0 font-black text-xs">✓</span>
+              <span>دليل التوسعة لربط قواعد البيانات و REST APIs</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#00F59B] border-2 border-black flex items-center justify-center shrink-0 font-black text-xs">✓</span>
+              <span>ترخيص تجاري غير محدود لك ولمشاريع عملائك</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#00F59B] border-2 border-black flex items-center justify-center shrink-0 font-black text-xs">✓</span>
+              <span>حاويات Docker و Cloud Run جاهزة للنشر</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#00F59B] border-2 border-black flex items-center justify-center shrink-0 font-black text-xs">✓</span>
+              <span>مجموعة اختبارات آلية متكاملة 9/9 PASS</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-[#00F59B] border-2 border-black flex items-center justify-center shrink-0 font-black text-xs">✓</span>
+              <span>تحديثات مجانية مستمرة لمواصفات 2026</span>
+            </div>
+          </div>
+
+          <!-- زر الشراء المباشر -->
+          <div class="border-t-4 border-black pt-5 text-center">
+            <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="neo-btn w-full inline-flex items-center justify-center gap-2 py-4 px-6 rounded-2xl font-black text-lg sm:text-xl text-black bg-[#FFE600] shadow-[5px_5px_0px_0px_#000]">
+              <span>شراء المشروع الآن بـ 400 جنية فقط</span>
+              <span class="font-mono text-xl">←</span>
+            </a>
+            <p class="mt-2.5 text-xs font-bold text-slate-600">تحميل مباشر وفوري لكامل ملفات الأكواد والمستندات فور إتمام الدفع.</p>
+          </div>
         </div>
 
-        <div class="matrix-card">
-          <table class="matrix-table" aria-label="Host verification matrix">
-            <thead>
-              <tr>
-                <th scope="col">Host Environment</th>
-                <th scope="col">Transport Wire</th>
-                <th scope="col">Result</th>
-                <th scope="col">Verification Method</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Google Antigravity IDE & 2.0</strong></td>
-                <td>stdio (JSON-RPC)</td>
-                <td><span class="status-tag status-pass">PASS ✓</span></td>
-                <td>Live host bridge execution via <code>call_mcp_tool</code> (0 side-effects)</td>
-              </tr>
-              <tr>
-                <td><strong>Cursor IDE</strong></td>
-                <td>stdio (JSON-RPC)</td>
-                <td><span class="status-tag status-pass">PASS ✓</span></td>
-                <td>Workspace auto-discovery via <code>.cursor/mcp.json</code></td>
-              </tr>
-              <tr>
-                <td><strong>Visual Studio Code</strong></td>
-                <td>stdio (JSON-RPC)</td>
-                <td><span class="status-tag status-pass">PASS ✓</span></td>
-                <td>Direct integration via <code>.vscode/mcp.json</code></td>
-              </tr>
-              <tr>
-                <td><strong>Claude Desktop</strong></td>
-                <td>stdio (JSON-RPC)</td>
-                <td><span class="status-tag status-pass">PASS ✓</span></td>
-                <td>Desktop launcher via <code>claude_desktop_config.json</code></td>
-              </tr>
-              <tr>
-                <td><strong>Docker Cloud Engine</strong></td>
-                <td>Streamable HTTP</td>
-                <td><span class="status-tag status-pass">PASS ✓</span></td>
-                <td>Containerized microservice build with zero session affinity</td>
-              </tr>
-              <tr>
-                <td><strong>Automated Test Suite</strong></td>
-                <td>Async Client</td>
-                <td><span class="status-tag status-pass">8/8 PASS ✓</span></td>
-                <td>Full primitive coverage (Tools, Resources, Prompts, Input Sanitization)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
     </section>
 
     <!-- =========================================================================
-         Commercial Pricing Tiers
+         قسم الأسئلة الشائعة (FAQ)
          ========================================================================= -->
-    <section class="section-padding" id="pricing" style="background: rgba(11, 17, 32, 0.4);">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-eyebrow">Transparent Commercial Licensing</div>
-          <h2 class="section-title">Simple, One-Time Investment</h2>
-          <p class="section-desc">Royalty-free commercial deployment. No recurring subscription fees. Build custom MCP servers for yourself or your clients with full confidence.</p>
-        </div>
-
-        <div class="pricing-grid">
-          <!-- Solo Tier -->
-          <div class="pricing-card">
-            <h3 class="plan-name">Solo Developer</h3>
-            <p class="plan-desc">For freelance engineers and independent developers building custom MCP servers.</p>
-            <div class="plan-price-wrap">
-              <span class="plan-price">$49</span>
-              <span class="plan-period">/ one-time</span>
-            </div>
-            <ul class="plan-features">
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Complete Source Code & Architecture</span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>6 Pre-Engineered Host Profiles</span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Developer Extensibility Guide (Postgres/Redis)</span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Unlimited Personal & Client Projects</span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Single Developer Commercial License</span>
-              </li>
-            </ul>
-            <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Get Solo License</a>
-          </div>
-
-          <!-- Team Tier (Featured) -->
-          <div class="pricing-card featured">
-            <div class="featured-pill">Most Popular</div>
-            <h3 class="plan-name">Team & Startup</h3>
-            <p class="plan-desc">For engineering teams deploying internal enterprise MCP microservices.</p>
-            <div class="plan-price-wrap">
-              <span class="plan-price">$149</span>
-              <span class="plan-period">/ one-time</span>
-            </div>
-            <ul class="plan-features">
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Everything in Solo Developer</strong></span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Up to 10 Developers / Team Seats</span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Docker Container & Cloud Run Blueprints</span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>CI/CD Purity Check Automation</span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Commercial SaaS Integration Rights</span>
-              </li>
-            </ul>
-            <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Get Team License</a>
-          </div>
-
-          <!-- Enterprise Tier -->
-          <div class="pricing-card">
-            <h3 class="plan-name">Enterprise</h3>
-            <p class="plan-desc">For organizations requiring unlimited seats and tailored architectural guidance.</p>
-            <div class="plan-price-wrap">
-              <span class="plan-price">$399</span>
-              <span class="plan-period">/ one-time</span>
-            </div>
-            <ul class="plan-features">
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span><strong>Everything in Team License</strong></span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Unlimited Developers & Company-Wide Use</span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>1-on-1 MCP Architecture Review Session</span>
-              </li>
-              <li class="feature-item">
-                <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Priority Issue Escalation</span>
-              </li>
-            </ul>
-            <a href="https://gumroad.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Get Enterprise License</a>
-          </div>
-        </div>
+    <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto" id="faq">
+      <div class="text-center mb-10">
+        <span class="inline-block bg-[#00C2FF] text-black font-black text-xs sm:text-sm px-4 py-1 rounded-full border-3 border-black shadow-[3px_3px_0px_0px_#000] mb-3">
+          لديك استفسار؟
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-black">الأسئلة الشائعة</h2>
+        <p class="mt-2 text-slate-700 font-medium">كل ما تحتاج معرفته عن المشروع، الترخيص، والهندسة المعمارية.</p>
       </div>
-    </section>
 
-    <!-- =========================================================================
-         FAQ Accordion
-         ========================================================================= -->
-    <section class="section-padding" id="faq">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-eyebrow">Got Questions?</div>
-          <h2 class="section-title">Frequently Asked Questions</h2>
-          <p class="section-desc">Everything you need to know about the product, licensing, and technical architecture.</p>
+      <div class="space-y-3.5 text-right">
+        <!-- سؤال 1 -->
+        <div class="faq-item neo-card bg-white overflow-hidden shadow-[5px_5px_0px_0px_#000]">
+          <button class="faq-trigger w-full px-5 py-4 text-right flex items-center justify-between gap-4 font-black text-base sm:text-lg text-black focus:outline-none" aria-expanded="false">
+            <span>لماذا تم بناء الخادم بلغة Python بدلاً من TypeScript؟</span>
+            <svg class="faq-icon shrink-0 transition-transform duration-200" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-content hidden px-5 pb-5 text-sm sm:text-base text-slate-800 leading-relaxed border-t-3 border-black pt-3 font-medium">
+            بايثون هي اللغة الرسمية والأكثر انتشاراً في مجالات الذكاء الاصطناعي وهندسة البيانات والأنظمة الخلفية. بفضل أداة <code dir="ltr">uv</code> وإطار <code dir="ltr">FastMCP 4</code>، يبدأ خادم بايثون في أقل من 38 ميلي ثانية، وبدون أي أعباء استهلاك للذاكرة مثل بيئات NodeJS.
+          </div>
         </div>
 
-        <div class="faq-wrap">
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              <span>Why build in Python instead of TypeScript?</span>
-              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-content">
-              <div class="faq-content-inner">
-                Python is the primary language of enterprise data infrastructure, machine learning pipelines, and backend automation. With Astral <code>uv</code> and FastMCP 4, Python MCP servers start up in under 50 milliseconds with zero NodeJS runtime bloat.
-              </div>
-            </div>
+        <!-- سؤال 2 -->
+        <div class="faq-item neo-card bg-white overflow-hidden shadow-[5px_5px_0px_0px_#000]">
+          <button class="faq-trigger w-full px-5 py-4 text-right flex items-center justify-between gap-4 font-black text-base sm:text-lg text-black focus:outline-none" aria-expanded="false">
+            <span>هل يمكنني ربط قواعد بيانات وخدمات شركتي الحقيقية بهذا الخادم؟</span>
+            <svg class="faq-icon shrink-0 transition-transform duration-200" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-content hidden px-5 pb-5 text-sm sm:text-base text-slate-800 leading-relaxed border-t-3 border-black pt-3 font-medium">
+            بالتأكيد! تم تصميم المشروع ليكون قالباً مرناً ومؤسسياً. راجع ملف <code dir="ltr">EXTENDING.md</code> الذي يوفر لك أكواداً جاهزة لربط PostgreSQL (عبر <code dir="ltr">asyncpg</code>) و Redis وواجهات REST خلال دقائق معدودة.
           </div>
+        </div>
 
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              <span>Can I connect my company's real databases and APIs?</span>
-              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-content">
-              <div class="faq-content-inner">
-                Yes! The server was architected specifically to be extended. Refer to <code>EXTENDING.md</code> for copy-paste examples showing how to connect PostgreSQL (via <code>asyncpg</code>), Redis, and proprietary REST APIs in under 5 minutes.
-              </div>
-            </div>
+        <!-- سؤال 3 -->
+        <div class="faq-item neo-card bg-white overflow-hidden shadow-[5px_5px_0px_0px_#000]">
+          <button class="faq-trigger w-full px-5 py-4 text-right flex items-center justify-between gap-4 font-black text-base sm:text-lg text-black focus:outline-none" aria-expanded="false">
+            <span>هل يتطلب الخادم تنصيب Docker لتشغيله محلياً؟</span>
+            <svg class="faq-icon shrink-0 transition-transform duration-200" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-content hidden px-5 pb-5 text-sm sm:text-base text-slate-800 leading-relaxed border-t-3 border-black pt-3 font-medium">
+            لا، يعمل الخادم محلياً وبشكل أصيل عبر أمر <code dir="ltr">uv run server.py</code> أو بايثون العادي. ملف <code dir="ltr">Dockerfile</code> مخصص للنشر السحابي في خوادم الإنتاج مثل AWS ECS أو GCP Cloud Run عند رغبتك في تشغيله كخدمة Microservice.
           </div>
+        </div>
 
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              <span>What is the license terms for client work?</span>
-              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-content">
-              <div class="faq-content-inner">
-                The Commercial License allows you to customize and deploy this server for unlimited internal projects and client deliverables without recurring royalties. The only restriction is that you cannot re-sell the raw template itself as a competing boilerplate.
-              </div>
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              <span>Does this require Docker to run locally?</span>
-              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="faq-content">
-              <div class="faq-content-inner">
-                No. For local IDE integration (Cursor, Claude, Antigravity), it runs directly via <code>uv run server.py</code> in stdio mode. Docker is completely optional and included for teams wanting to deploy containerized Streamable HTTP services.
-              </div>
-            </div>
+        <!-- سؤال 4 -->
+        <div class="faq-item neo-card bg-white overflow-hidden shadow-[5px_5px_0px_0px_#000]">
+          <button class="faq-trigger w-full px-5 py-4 text-right flex items-center justify-between gap-4 font-black text-base sm:text-lg text-black focus:outline-none" aria-expanded="false">
+            <span>ما هي حقوق الترخيص التجاري الممنوحة لي بعد الشراء؟</span>
+            <svg class="faq-icon shrink-0 transition-transform duration-200" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-content hidden px-5 pb-5 text-sm sm:text-base text-slate-800 leading-relaxed border-t-3 border-black pt-3 font-medium">
+            تحصل على رخصة استخدام تجاري كاملة وغير محدودة تتيح لك تضمين وتعديل واستخدام الخادم في كافة مشاريعك ومشاريع عملائك الخاصة والشركات بدون أي رسوم إضافية، مع حظر إعادة بيع الحزمة ذاتها كقالب برمجي مكرر.
           </div>
         </div>
       </div>
@@ -537,72 +667,44 @@
   </main>
 
   <!-- =========================================================================
-       Footer
+       التذييل الرسمي (Footer)
        ========================================================================= -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="brand-lockup">
-            <div class="brand-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                <polyline points="2 17 12 22 22 17"></polyline>
-                <polyline points="2 12 12 17 22 12"></polyline>
-              </svg>
-            </div>
-            <span>Enterprise Asset OS</span>
-          </div>
-          <p>Production-grade Model Context Protocol (MCP) server architecture. Engineered for zero protocol crashes and instant AI host compatibility.</p>
+  <footer class="bg-black text-white border-t-4 border-black py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-right">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#FFE600] border-2 border-white flex items-center justify-center font-black text-lg text-black shrink-0">
+          ب
         </div>
-
-        <div>
-          <h4 class="footer-title">Navigation</h4>
-          <ul class="footer-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#simulator">Protocol Simulator</a></li>
-            <li><a href="#hosts">Host Profiles</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="footer-title">Documentation</h4>
-          <ul class="footer-links">
-            <li><a href="https://github.com/s7so/enterprise-asset-os/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a></li>
-            <li><a href="https://github.com/s7so/enterprise-asset-os/blob/main/EXTENDING.md" target="_blank" rel="noopener noreferrer">Extending Guide</a></li>
-            <li><a href="https://github.com/s7so/enterprise-asset-os/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Commercial License</a></li>
-            <li><a href="https://antigravity.google/docs/mcp" target="_blank" rel="noopener noreferrer">Antigravity Docs</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="footer-title">Community</h4>
-          <ul class="footer-links">
-            <li><a href="https://github.com/s7so/enterprise-asset-os" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
-            <li><a href="https://github.com/s7so/enterprise-asset-os/issues" target="_blank" rel="noopener noreferrer">Issue Tracker</a></li>
-            <li><a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">MCP Protocol Spec</a></li>
-          </ul>
+        <div class="text-right">
+          <div class="font-black text-base text-white">البرمجة بالبلدي (Programming Bel-Balady)</div>
+          <div class="text-xs text-slate-400 font-mono" dir="ltr">Enterprise Asset OS · Model Context Protocol</div>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <div>© 2026 Enterprise Asset OS. All rights reserved. Commercial Software.</div>
-        <div>Engineered according to the <strong>UI/UX Pro Max</strong> Technical Specification Baseline.</div>
+      <div class="flex flex-wrap items-center justify-center gap-5 text-sm font-bold">
+        <a href="#features" class="hover:text-[#FFE600] transition-colors">المميزات</a>
+        <a href="#simulator" class="hover:text-[#00C2FF] transition-colors">المحاكاة الحية</a>
+        <a href="#hosts" class="hover:text-[#00F59B] transition-colors">المنصات المدعومة</a>
+        <a href="#pricing" class="hover:text-[#FF007A] transition-colors">الترخيص (400 ج.م)</a>
+        <a href="https://github.com/s7so/enterprise-asset-os" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
+      </div>
+
+      <div class="text-xs text-slate-400 font-medium">
+        جميع الحقوق محفوظة © 2026 — منصة <strong>البرمجة بالبلدي</strong>.
       </div>
     </div>
   </footer>
 
-  <!-- =========================================================================
-       Toast Notification System
-       ========================================================================= -->
-  <div class="toast-notice" id="toast-notification" role="status" aria-live="polite">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-emerald)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- عنصر التنبيه التفاعلي المنبثق عند النسخ -->
+  <div id="toast-notification" class="fixed bottom-6 start-6 z-50 transition-all duration-300 transform translate-y-6 opacity-0 pointer-events-none neo-card px-5 py-3.5 bg-[#00F59B] text-black border-3 border-black shadow-[6px_6px_0px_0px_#000] flex items-center gap-3 font-black text-sm" role="status" aria-live="polite">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <polyline points="20 6 9 17 4 12"></polyline>
     </svg>
-    <span class="toast-text">Configuration copied to clipboard!</span>
+    <span class="toast-text">تم نسخ الإعدادات بنجاح للحافظة!</span>
   </div>
 
-  <script src="app.js"></script>
+  <!-- Vite Module Script -->
+  <script type="module" src="./src/app.js"></script>
 </body>
 </html>

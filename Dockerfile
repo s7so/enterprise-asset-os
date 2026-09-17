@@ -4,6 +4,6 @@ COPY pyproject.toml uv.lock README.md ./
 COPY src/ ./src/
 RUN pip install --no-cache-dir uv && uv sync --frozen --no-dev
 COPY server.py .
-ENV MCP_TRANSPORT=http PORT=8000 LOG_LEVEL=INFO
+ENV MCP_TRANSPORT=http PORT=8000 LOG_LEVEL=INFO CACHE_TTL=300
 EXPOSE 8000
-CMD ["uv", "run", "python", "server.py"]
+CMD ["uv", "run", "enterprise-asset-os"]

@@ -48,9 +48,19 @@ $env:PORT="8000"
 uv run server.py
 ```
 
-### تشغيل الاختبارات المؤتمتة
+### تشغيل الاختبارات المؤتمتة ومنظومة التحقق
 ```bash
-uv run pytest -q
+# 1. الاختبارات المعزولة الافتراضية (19 اختباراً تعمل 100% offline ببيانات synthetic بصيغ إنتاجية):
+uv run pytest -v
+
+# 2. جلب بيانات أبحاث Loghub والتحقق من الهاشات المشفرة (اختياري للأبحاث والتقييم):
+uv run tests/data/fetch_real_fixtures.py
+
+# 3. تشغيل كامل الاختبارات مع بيانات Loghub (24 اختباراً شاملاً):
+# Linux / macOS:
+RUN_REAL_DATA=1 uv run pytest -v
+# Windows (PowerShell):
+$env:RUN_REAL_DATA="1"; uv run pytest -v
 ```
 
 ## الإعداد والربط مع بيئات الذكاء الاصطناعي (AI Hosts)

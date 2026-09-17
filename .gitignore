@@ -32,6 +32,13 @@ htmlcov/
 *.log
 *.sqlite
 *.db
+tests/data/raw/
+tests/data/real_*.json
+
+# Node.js & Frontend build artifacts
+node_modules/
+landing/dist/
+.vite/
 
 # Operating System & IDE artifacts
 .DS_Store

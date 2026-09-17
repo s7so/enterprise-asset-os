@@ -264,3 +264,42 @@ Whenever you customize database queries, update your tests in `tests/test_server
 ```bash
 uv run pytest -v
 ```
+
+---
+
+## Step 6: Testing with Synthetic & Research-Licensed Datasets (Fetch-on-Demand)
+
+`Enterprise Asset OS` follows strict license compliance and distribution boundaries:
+- **Default Offline Tests**: Run against `tests/data/synthetic_fixtures.json` (production-format-mimicking samples with zero restricted data).
+- **Research Benchmarks (Loghub)**: Never bundled in distributed artifacts; acquired strictly fetch-on-demand via pinned cryptographic hashes.
+
+### 1. Default Offline CI Suite
+Runs out-of-the-box with full network isolation:
+```bash
+uv run pytest -v
+```
+
+### 2. Fetching Real Research Datasets (Opt-In)
+To download and verify canonical Loghub benchmarks under the **Loghub Research/Academic License** (arXiv:2308.07703):
+```bash
+uv run tests/data/fetch_real_fixtures.py
+```
+
+### 3. Running Opt-In Real Data Benchmarks
+Once fetched, execute the full test suite including verified Loghub incident evaluations:
+```bash
+# On Linux/macOS
+RUN_REAL_DATA=1 uv run pytest -v
+
+# On Windows (PowerShell)
+$env:RUN_REAL_DATA="1"; uv run pytest -v
+```
+
+### 4. Activating Live Enterprise Prometheus Telemetry
+To point your server to your own corporate Prometheus monitoring deployment:
+```bash
+export TELEMETRY_BACKEND="prometheus"
+export TELEMETRY_PROMETHEUS_URL="http://your-internal-prometheus:9090"
+uv run server.py
+```
+

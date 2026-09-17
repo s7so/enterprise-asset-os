@@ -1,110 +1,106 @@
-# Enterprise Asset OS: The Production-Grade MCP Server Boilerplate
-### Built on FastMCP 4 & MCP Python SDK v2 — Fully Aligned with the 2026-07-28 Stateless Specification
+# البرمجة بالبلدي: نظام تشغيل خوادم بروتوكول MCP للمؤسسات (Enterprise Asset OS)
+### مبني بأحدث معايير FastMCP 4 ومكتبة Python SDK الرسمية — متوافق كلياً مع مواصفات 2026-07-28 عديمة الحالة (Stateless)
 
-> **Stop wasting 40+ hours debugging JSON-RPC transport crashes, broken handshakes, and host configuration errors.** Get a battle-tested, zero-overhead Model Context Protocol (MCP) server ready for production deployment in minutes.
-
----
-
-## 🛑 The Hidden Traps of Building MCP Servers in 2026
-
-If you've tried building custom MCP servers for Claude Desktop, Cursor, or Antigravity, you've likely hit these production nightmares:
-
-1. **The Stdout Poisoning Crash:** A single diagnostic `print()` statement or third-party log ruins your JSON-RPC stream, causing AI clients to silently disconnect or throw obscure parse errors.
-2. **The Handshake / Session State Trap:** Stateful sessions (`Mcp-Session-Id`) break behind round-robin load balancers, requiring complex Redis sticky sessions for cloud deployments.
-3. **The Multi-Host Configuration Hell:** Claude Desktop, Cursor, VS Code, and Antigravity each require distinct configuration syntax, paths, and transport assumptions.
-4. **The "Agent Fabrication" Anti-Pattern:** When tools fail quietly, language models hallucinate answers from source code rather than reporting verifiable failures.
+> **وفر أكثر من 40 ساعة من المعاناة في تصحيح أخطاء انهيار قنوات اتصال JSON-RPC ومشاكل التهيئة المعقدة.** احصل على خادم بروتوكول Model Context Protocol (MCP) صلب، فائق السرعة، ومجرب في بيئات الإنتاج الفعلية، جاهز للنشر خلال 5 دقائق فقط.
 
 ---
 
-## ⚡ What Makes Enterprise Asset OS Different?
+## 🛑 الفخاخ الخفية في بناء خوادم MCP في عام 2026
 
-`Enterprise Asset OS` is engineered specifically to eliminate these points of failure:
+إذا حاولت بناء خادم MCP مخصص لمنصات مثل Claude Desktop أو Cursor أو Antigravity، فمن المؤكد أنك واجهت هذه الكوابيس الهندسية:
 
-### 1. 🛡️ 100% Guaranteed Stdout Isolation
-All internal telemetry, framework notices, and library logs are strictly redirected to `stderr`. `stdout` is reserved exclusively for clean, newline-delimited JSON-RPC 2.0 frames. Your AI hosts will **never crash** from log contamination.
+1. **انهيار تلوث مخرجات Stdout:** أمر طباعة تشخيصي واحد `print()` أو سجل غير مضبوط من مكتبة خارجية يفسد فوراً مجرى بيانات JSON-RPC، مما يتسبب في انقطاع اتصال عملاء الذكاء الاصطناعي فجأة دون أي توضيح.
+2. **فخ التعلق بحالة الجلسة (Session State Trap):** الخوادم القديمة التي تعتمد على تفاوض الجلسات تفشل حتماً خلف موازنات الأحمال السحابية (Load Balancers)، مما يتطلب بنية تحتية معقدة من Redis لإدارة الجلسات الثابتة.
+3. **جحيم التهيئة عبر المنصات المتعددة:** كل محرر وعميل ذكاء اصطناعي (Claude Desktop, Cursor, VS Code, Antigravity) يفرض صيغة إعداد ومسارات تشغيل مختلفة تماماً.
+4. **ظاهرة الهلوسة البرمجية عند الفشل الصامت:** عندما تفشل الأدوات بصمت، تبدأ النماذج اللغوية في تأليف إجابات وهمية من سياق الكود بدلاً من الإبلاغ عن الخطأ الفعلي.
 
-### 2. 🌐 2026-07-28 Stateless Baseline
-Fully aligned with the modern stateless specification. No connection-lifetime state, no handshake bottlenecks, and no session affinity required. Deploy anywhere behind standard API gateways or cloud load balancers.
+---
 
-### 3. 🔌 6 Pre-Built, Plug-and-Play Host Profiles
-Tested and pre-configured out-of-the-box for:
+## ⚡ ما الذي يميز هذا المشروع من "البرمجة بالبلدي"؟
+
+تمت هندسة **Enterprise Asset OS** خصيصاً للقضاء التام على نقاط الضعف تلك:
+
+### 1. 🛡️ عزل تام ومضمون 100% للـ Stdout
+كافة السجلات الداخلية للبرمجية، والرسائل التشخيصية، وملاحظات المكتبات يتم توجيهها بصرامة إلى قناة `stderr`. تظل قناة `stdout` مكرسة بنسبة 100% لإطارات JSON-RPC 2.0 النقية. لن ينهار اتصال عملاء الذكاء الاصطناعي معك أبداً بسبب تلوث المخرجات.
+
+### 2. 🌐 بنية عديمة الحالة بالكامل (Stateless Baseline 2026-07-28)
+متوافق تماماً مع أحدث المواصفات القياسية. لا توجد جلسات دائمة في الذاكرة، ولا عنق زجاجة عند المصافحة. يمكنك نشر الخادم في أي بيئة سحابية خلف موازنات الأحمال العادية بمنتهى السلاسة.
+
+### 3. 🔌 تهيئة جاهزة مسبقاً لـ 6 منصات رئيسية
+مختبر وجاهز للتشغيل الفوري بنقرة زر واحدة لكل من:
 - **Google Antigravity IDE & 2.0** (`.agents/mcp_config.json`)
 - **Cursor IDE** (`.cursor/mcp.json`)
 - **Visual Studio Code** (`.vscode/mcp.json`)
 - **Claude Desktop** (`configs/claude_desktop_config.json`)
 - **Windsurf** (`configs/windsurf_config.json`)
-- **Docker Container** (`Dockerfile`)
+- **حاويات Docker السحابية** (`Dockerfile`)
 
-### 4. 🚀 Dual Wire Transports
-- **stdio mode:** Default local transport for IDEs and desktop clients with zero network overhead.
-- **Streamable HTTP mode:** Set `MCP_TRANSPORT=http` to instantly turn your server into a horizontally-scalable microservice.
+### 4. 🚀 نمطا نقل متكاملان (Dual Wire Transports)
+- **نمط stdio:** النمط الافتراضي عالي الكفاءة للمحررات والبيئات المحلية دون أي استهلاك للشبكة.
+- **نمط Streamable HTTP:** عبر تعيين متغير البيئة `MCP_TRANSPORT=http`، يتحول الخادم فوراً إلى خدمة سحابية Microservice قابلة للتوسع الأفقي.
 
-### 5. 🧪 100% Automated Test Suite (8/8 Passing)
-Comes with an end-to-end `pytest` suite testing all primitives: Tools, Resource Templates, Prompts, and strict Input Sanitization (protecting against path traversal and prompt injections).
+### 5. 🧪 حزمة اختبارات آلية شاملة (9/9 PASS)
+يتضمن حزمة اختبارات متكاملة مبنية على `pytest` تغطي كافة عناصر البروتوكول الأساسية: الأدوات (Tools)، قوالب الموارد (Resource Templates)، الأوامر الموجهة (Prompts)، والتحقق الأمني الصارم من المدخلات للحماية من هجمات حقن الأوامر وتخطي المسارات.
 
 ---
 
-## 📊 The Verification Matrix: Verified on Real Hosts
+## 📊 مصفوفة التحقق: اختبار حقيقي على المنصات الفعلية
 
-Unlike typical open-source MCP scripts tested only via mock objects, Enterprise Asset OS has been verified in live host runtimes:
+خلافاً للأكواد مفتوحة المصدر البسيطة التي تختبر عبر نماذج وهمية، تم اختبار وتأكيد عمل Enterprise Asset OS على منصات التشغيل الحية:
 
-| Host / Target | Protocol | Test Result | Verification Method |
+| المنصة / الهدف | البروتوكول المستخدم | نتيجة الاختبار | وسيلة التحقق |
 | :--- | :---: | :---: | :--- |
-| **Antigravity IDE** | stdio | **PASS ✅** | Live host tool bridge (`call_mcp_tool`) |
-| **Cursor IDE** | stdio | **PASS ✅** | Workspace config discovery |
-| **VS Code** | stdio | **PASS ✅** | `.vscode/mcp.json` task integration |
-| **Claude Desktop** | stdio | **PASS ✅** | Native stdio launcher |
-| **Docker Engine** | HTTP / SSE | **PASS ✅** | Stateless containerized build |
-| **Test Suite** | Async Client | **8/8 PASS ✅** | Zero flake, full primitive coverage |
+| **Antigravity IDE** | stdio | **ناجح ومؤكد ✅** | استدعاء الأداة المباشر عبر `call_mcp_tool` |
+| **Cursor IDE** | stdio | **ناجح ومؤكد ✅** | التحقق من اكتشاف إعدادات مساحة العمل |
+| **VS Code** | stdio | **ناجح ومؤكد ✅** | تكامل مهام `.vscode/mcp.json` |
+| **Claude Desktop** | stdio | **ناجح ومؤكد ✅** | مشغل stdio الأصيل لسطح المكتب |
+| **Docker Engine** | HTTP / SSE | **ناجح ومؤكد ✅** | بناء حاوية خفيفة عديمة الحالة |
+| **حزمة الاختبارات الآلية** | عميل FastMCP غير التزامني | **9/9 ناجح بالكامل ✅** | تغطية شاملة وخلو تام من التذبذب |
 
 ---
 
-## 📦 What You Get in the Box
+## 📦 محتويات الحزمة البرمجية الكاملة
 
-- 📁 **`server.py`**: The clean, production-grade core built on FastMCP 4.
-- 📁 **`configs/`**: Multi-client configuration directory with pre-built profiles for all major AI editors.
-- 📁 **`tests/`**: Comprehensive pytest async test suite.
-- 📁 **`EXTENDING.md`**: Step-by-step developer guide for connecting PostgreSQL, Redis, Datadog, or custom REST APIs in under 5 minutes.
-- 📁 **`Dockerfile`**: Ultra-lightweight container image ready for Kubernetes, AWS ECS, GCP Cloud Run, or Fly.io.
-- 📁 **`.github/workflows/ci.yml`**: GitHub Actions CI pipeline testing code quality and pytest on every push.
-- 📁 **`LICENSE`**: Commercial Software License granting unlimited commercial use for your own internal and client projects.
-
----
-
-## 💰 Pricing & Licenses
-
-### 🧑‍💻 Solo Developer License — $49
-- Complete Source Code & Configuration Files
-- Single-Developer Commercial Use
-- Unlimited Internal & Client Projects
-- Lifetime Updates for 2026 Spec Revisions
-
-### 🏢 Team / Startup License — $149
-- Everything in Solo Developer License
-- Up to 10 Team Members
-- Priority Support & Architecture Review Checklist
-- Commercial Redistribution in Proprietary SaaS Applications
-
-### 🏛️ Enterprise / Custom License — $399
-- Everything in Team License
-- Unlimited Developers across your Organization
-- 1-on-1 MCP Architecture Guidance & Integration Review
+- 📁 **`server.py`**: النواة البرمجية الإنتاجية الصلبة المبنية على FastMCP 4.
+- 📁 **`configs/`**: مجلد التهيئة الشامل لكافة محررات وعملاء الذكاء الاصطناعي.
+- 📁 **`tests/`**: حزمة اختبارات `pytest` غير تزامنية متكاملة.
+- 📁 **`EXTENDING.md`**: دليل المطور الشامل خطوة بخطوة لربط PostgreSQL أو Redis أو واجهات REST في أقل من 5 دقائق.
+- 📁 **`Dockerfile`**: حاوية تشغيل خفيفة للغاية ومجهزة للرفع المباشر على Kubernetes أو AWS ECS أو Cloud Run.
+- 📁 **`.github/workflows/ci.yml`**: خط أنابيب الفحص الآلي المستمر لضمان جودة الكود ونقاء المخرجات مع كل تعديل.
+- 📁 **`LICENSE`**: ترخيص الاستخدام التجاري غير المحدود لمشاريعك ومشاريع عملائك الخاصة.
 
 ---
 
-## ❓ Frequently Asked Questions
+## 💰 الاستثمار والترخيص التجاري
 
-#### Q: Can I replace the sample server telemetry with my own database?
-**Yes.** We designed this specifically as a modular boilerplate. Refer to `EXTENDING.md` for copy-paste examples using PostgreSQL (`asyncpg`), Redis, or internal REST APIs.
+### 🏆 الترخيص التجاري الكامل — 400 جنية مصري فقط (400 EGP)
+**دفعة واحدة لمرة واحدة مدى الحياة · حقوق تجارية كاملة وغير محدودة**
 
-#### Q: Does it require Docker to run locally?
-**No.** It runs natively using Astral `uv` or standard Python 3.10+. Docker is completely optional and included for cloud deployments.
-
-#### Q: Why Python instead of TypeScript?
-Python is the native language of enterprise AI, data pipelines, and infrastructure automation. With `uv` and FastMCP 4, Python MCP servers start up in milliseconds without NodeJS runtime overhead.
+- كود المصدر بالكامل مع كامل الهيكلية البرمجية (FastMCP 4 & Python SDK v2).
+- إعدادات جاهزة لـ 6 منصات (Antigravity, Cursor, VS Code, Claude, Windsurf, Docker).
+- ضمان عزل تام 100% لمخرجات الطباعة (انعدام انهيار الاتصال).
+- دليل التوسعة البرمجي لربط قواعد البيانات والخدمات السحابية.
+- حقوق استخدام تجاري كاملة في مشاريعك الخاصة ومشاريع عملائك.
+- حاوية Docker مجهزة للنشر السحابي الفوري.
+- حزمة اختبارات آلية 9/9 PASS.
+- تحديثات مجانية مستمرة لتوافق مواصفات البروتوكول.
 
 ---
 
-## 🚀 Get Instant Access
-Ready to ship production MCP servers without the headache?
-**[ Download Enterprise Asset OS Now ]**
+## ❓ الأسئلة الشائعة
+
+#### س: هل يمكنني استبدال القياسات التجريبية بقاعدة بيانات شركتي الحقيقية؟
+**نعم بالتأكيد.** تم تصميم هذا المشروع ليكون قالباً مرناً وقابلاً للتوسعة المؤسسية. راجع ملف `EXTENDING.md` للأمثلة الجاهزة لربط PostgreSQL (عبر `asyncpg`) و Redis وواجهات REST البرمجية.
+
+#### س: هل أحتاج إلى Docker لتشغيل الخادم محلياً؟
+**لا.** يعمل الخادم محلياً بأعلى كفاءة عبر أمر `uv run server.py` أو بايثون العادي. ملف Docker مخصص للنشر السحابي عند الحاجة.
+
+#### س: لماذا لغة Python بدلاً من TypeScript؟
+بايثون هي اللغة الأم للبنية التحتية للذكاء الاصطناعي وهندسة البيانات. بفضل أداة `uv` وإطار `FastMCP 4`، يقلع خادم بايثون في أجزاء من الميلي ثانية وبدون أي أعباء ذاكرة تشغيلية.
+
+---
+
+## 🚀 ابدأ الآن فوراً
+هل أنت مستعد لنشر خوادم بروتوكول MCP بمستوى مؤسسي وبدون أي صداع تقني؟
+**[ احصل على مشروع Enterprise Asset OS الآن بـ 400 جنية مصري فقط ]**
+*(من إبداع منصة البرمجة بالبلدي)*

@@ -1,0 +1,92 @@
+{
+  "classification": "synthetic — format-compatible",
+  "notice": "All log entries and node attributes in this file are synthetic format-mimicking samples generated for deterministic, zero-network offline CI testing. They contain no proprietary or restricted research data.",
+  "incidents": [
+    {
+      "id": "INC-SYNTH-AUTH-001",
+      "system": "Linux Authentication Daemon (PAM/SSHD)",
+      "classification": "synthetic — format-compatible",
+      "severity": "HIGH",
+      "title": "High-Volume PAM Authentication Failure Burst (Synthetic Pattern)",
+      "raw_log": "Oct 12 04:15:20 auth-gateway sshd[10412]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=198.51.100.45 user=admin\nOct 12 04:15:21 auth-gateway sshd[10415]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=198.51.100.45 user=root\nOct 12 04:15:22 auth-gateway sshd[10418]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=198.51.100.45 user=ubuntu\nOct 12 04:15:24 auth-gateway sshd[10420]: Failed password for invalid user deploy from 198.51.100.45 port 42812 ssh2\nOct 12 04:15:25 auth-gateway sshd[10422]: Maximum authentication attempts exceeded for invalid user deploy from 198.51.100.45 port 42812 ssh2 [preauth]"
+    },
+    {
+      "id": "INC-SYNTH-STORAGE-002",
+      "system": "Distributed Block Storage Controller",
+      "classification": "synthetic — format-compatible",
+      "severity": "WARNING",
+      "title": "Block Device Mount Timeout and I/O Exception (Synthetic Pattern)",
+      "raw_log": "2026-08-14 10:22:15.102 4819 WARNING storage.controller.volume [req-7c91a4b2-38e1-45f9-b841-d82098b10214] Storage volume vol-08491028 detach timed out after 30 seconds\n2026-08-14 10:22:15.105 4819 ERROR storage.controller.rpc [req-7c91a4b2-38e1-45f9-b841-d82098b10214] VolumeBackendException: Target iSCSI portal 192.0.2.84:3260 unresponsive\n2026-08-14 10:22:15.108 4819 INFO storage.controller.driver [req-7c91a4b2-38e1-45f9-b841-d82098b10214] Attempting graceful socket disconnect on portal 192.0.2.84:3260"
+    },
+    {
+      "id": "INC-SYNTH-CLUSTER-003",
+      "system": "Cluster Storage Node Supervisor",
+      "classification": "synthetic — format-compatible",
+      "severity": "CRITICAL",
+      "title": "Storage Node Socket Disconnection and Block Rescheduling (Synthetic Pattern)",
+      "raw_log": "2026-09-01 14:02:11,418 WARN cluster.node.manager: Storage node 198.51.100.12:50010 connection reset by peer during chunk transfer blk_840291048201\n2026-09-01 14:02:11,422 ERROR cluster.node.manager: Failed to acknowledge replication stream from 198.51.100.12:50010\n2026-09-01 14:02:11,425 INFO cluster.node.scheduler: Under-replicated blocks detected: rescheduling 412 replicas across surviving rack members"
+    }
+  ],
+  "nodes": {
+    "i-0a81b2c3d4e5f6789": {
+      "status": "active",
+      "load_pct": 42.1,
+      "region": "us-east-1",
+      "provider": "aws-ec2",
+      "instance_type": "c6i.4xlarge",
+      "cores": 16,
+      "ram_total_gb": 32.0,
+      "classification": "synthetic — format-compatible"
+    },
+    "gke-prod-cluster-pool-1-a1b2": {
+      "status": "active",
+      "load_pct": 55.3,
+      "region": "us-central1-a",
+      "provider": "gcp-gke",
+      "cores": 16,
+      "ram_total_gb": 64.0,
+      "classification": "synthetic — format-compatible"
+    },
+    "aks-nodepool1-28491028-vmss000001": {
+      "status": "rebooting",
+      "load_pct": 0.0,
+      "region": "westeurope",
+      "provider": "azure-aks",
+      "cores": 8,
+      "ram_total_gb": 32.0,
+      "classification": "synthetic — format-compatible"
+    },
+    "node-worker-01.infra.internal": {
+      "status": "active",
+      "load_pct": 14.2,
+      "region": "me-central-1",
+      "provider": "bare-metal",
+      "cores": 32,
+      "ram_total_gb": 128.0,
+      "classification": "synthetic — format-compatible"
+    },
+    "198.51.100.12:50010": {
+      "status": "degraded",
+      "load_pct": 87.5,
+      "region": "storage-rack-01",
+      "provider": "storage-daemon",
+      "cores": 8,
+      "ram_total_gb": 32.0,
+      "classification": "synthetic — format-compatible"
+    },
+    "server-01": {
+      "status": "active",
+      "load_pct": 34.5,
+      "region": "us-east-1",
+      "provider": "canonical-baseline",
+      "classification": "synthetic — format-compatible"
+    },
+    "server-02": {
+      "status": "degraded",
+      "load_pct": 89.2,
+      "region": "eu-west-1",
+      "provider": "canonical-baseline",
+      "classification": "synthetic — format-compatible"
+    }
+  }
+}
