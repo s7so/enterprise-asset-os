@@ -254,6 +254,79 @@ async def query_store_inventory(
     }
 
 
+try:
+    from enterprise_asset_os.accounting import (
+        get_unpaid_invoices_sync,
+        get_cash_flow_summary_sync,
+    )
+except ImportError:
+    from .accounting import (
+        get_unpaid_invoices_sync,
+        get_cash_flow_summary_sync,
+    )
+
+
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="Get Unpaid Invoices",
+        readOnlyHint=True,
+        idempotentHint=True,
+        openWorldHint=False,
+    )
+)
+async def get_unpaid_invoices(
+    client_name: str = "",
+    min_days_overdue: int = 0,
+    limit: int = 10,
+    ctx: Context = None,
+) -> dict:
+    """Retrieve unpaid and partially-paid client invoices with overdue aging analysis for ERP/accounting auditing.
+
+    Args:
+        client_name: Optional filter by client company name or partial name.
+        min_days_overdue: Minimum days past due date (e.g. 30 for 30+ days overdue). Default 0 returns all pending.
+        limit: Maximum number of invoice records to return (default: 10).
+    """
+    logger.info("get_unpaid_invoices called (client='%s', min_overdue=%d, limit=%d)", client_name, min_days_overdue, limit)
+    result = await asyncio.to_thread(
+        get_unpaid_invoices_sync,
+        client_name=client_name,
+        min_days_overdue=min_days_overdue,
+        limit=limit,
+    )
+    if ctx:
+        await ctx.report_progress(progress=1, total=1)
+    return result
+
+
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="Get Cash Flow Summary",
+        readOnlyHint=True,
+        idempotentHint=True,
+        openWorldHint=False,
+    )
+)
+async def get_cash_flow_summary(
+    currency: str = "EGP",
+    ctx: Context = None,
+) -> dict:
+    """Generate consolidated cash flow, collections, receivables, and debtor aging distribution for executive finance review.
+
+    Args:
+        currency: Target ISO currency code (e.g. 'EGP' or 'USD'). Default: 'EGP'.
+    """
+    logger.info("get_cash_flow_summary called (currency='%s')", currency)
+    result = await asyncio.to_thread(
+        get_cash_flow_summary_sync,
+        currency=currency,
+    )
+    if ctx:
+        await ctx.report_progress(progress=1, total=1)
+    return result
+
+
+
 
 
 @mcp.resource("config://schemas/{schema_type}")

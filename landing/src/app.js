@@ -20,6 +20,7 @@ function initTerminalSimulator() {
   const latencyDisplay = document.getElementById('terminal-latency-val');
   const queryBtn1 = document.getElementById('btn-query-01');
   const queryBtn2 = document.getElementById('btn-query-02');
+  const erpBtn = document.getElementById('btn-query-erp');
   const injectBtn = document.getElementById('btn-query-inject');
   const stdoutToggle = document.getElementById('btn-toggle-stdout');
 
@@ -73,11 +74,37 @@ function initTerminalSimulator() {
         }
       },
       latency: "9ms"
+    },
+    'erp': {
+      request: { jsonrpc: "2.0", id: 4, method: "tools/call", params: { name: "get_unpaid_invoices", arguments: { min_days_overdue: 30 } } },
+      stderr: "[2026-09-18 00:45:10] INFO [EnterpriseAssetMCP]: get_unpaid_invoices called (min_days_overdue=30)",
+      response: {
+        jsonrpc: "2.0",
+        id: 4,
+        result: {
+          content: [{
+            type: "text",
+            text: JSON.stringify({
+              status: "success",
+              as_of_date: "2026-09-18",
+              total_unpaid_found: 7,
+              total_outstanding_sum: 845000.0,
+              filter_applied: { min_days_overdue: 30, client_name: "ALL" },
+              invoices: [
+                { invoice_number: "INV-2026-0041", client_name: "شركة الأهرام للتوزيع والتوكيلات", amount_due: 150000.0, days_overdue: 100, urgency: "CRITICAL" },
+                { invoice_number: "INV-2026-0055", client_name: "الشركة الهندسية للتصنيع المتطور", amount_due: 320000.0, days_overdue: 90, urgency: "CRITICAL" },
+                { invoice_number: "INV-2026-0082", client_name: "مجموعة النيل للتوريدات الطبية", amount_due: 95000.0, days_overdue: 55, urgency: "WARNING" }
+              ]
+            }, null, 2)
+          }]
+        }
+      },
+      latency: "11ms"
     }
   };
 
   function updateActiveButton(activeBtn) {
-    [queryBtn1, queryBtn2, injectBtn].forEach(btn => {
+    [queryBtn1, queryBtn2, erpBtn, injectBtn].forEach(btn => {
       if (!btn) return;
       if (btn === activeBtn) {
         btn.classList.add('bg-[#FFE600]', 'text-black', 'shadow-[2px_2px_0px_0px_#000]', 'translate-x-[2px]', 'translate-y-[2px]');
@@ -181,6 +208,7 @@ function initTerminalSimulator() {
   // Bind simulation buttons
   if (queryBtn1) queryBtn1.addEventListener('click', () => executeSimulation('server-01', queryBtn1));
   if (queryBtn2) queryBtn2.addEventListener('click', () => executeSimulation('server-02', queryBtn2));
+  if (erpBtn) erpBtn.addEventListener('click', () => executeSimulation('erp', erpBtn));
   if (injectBtn) injectBtn.addEventListener('click', () => executeSimulation('injection', injectBtn));
 
   if (stdoutToggle) {

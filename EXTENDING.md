@@ -303,3 +303,45 @@ export TELEMETRY_PROMETHEUS_URL="http://your-internal-prometheus:9090"
 uv run server.py
 ```
 
+---
+
+## Step 7: Connecting Live ERP & Accounting Systems (Odoo / Daftra / PostgreSQL)
+
+The built-in accounting engine (`src/enterprise_asset_os/accounting.py`) powers `get_unpaid_invoices` and `get_cash_flow_summary` with zero-configuration SQLite benchmark data out-of-the-box. To route queries directly to live production accounting databases:
+
+### Option A: Direct PostgreSQL (Odoo ERP `account_move` table)
+```python
+import asyncpg
+
+async def get_odoo_unpaid_invoices(min_days_overdue: int = 0):
+    conn = await asyncpg.connect("postgresql://odoo_user:password@localhost:5432/odoo_db")
+    query = """
+        SELECT m.name AS invoice_number, p.name AS client_name, 
+               m.invoice_date_due AS due_date, m.amount_total, 
+               m.amount_residual AS amount_due,
+               CURRENT_DATE - m.invoice_date_due AS days_overdue
+        FROM account_move m
+        JOIN res_partner p ON p.id = m.partner_id
+        WHERE m.state = 'posted' AND m.payment_state IN ('not_paid', 'partial')
+          AND (CURRENT_DATE - m.invoice_date_due) >= $1
+        ORDER BY days_overdue DESC;
+    """
+    rows = await conn.fetch(query, min_days_overdue)
+    await conn.close()
+    return [dict(r) for r in rows]
+```
+
+### Option B: REST API (Daftra Cloud Invoicing)
+```python
+import httpx
+
+async def get_daftra_unpaid_invoices(api_key: str, subdomain: str):
+    headers = {"API-KEY": api_key, "Accept": "application/json"}
+    url = f"https://{subdomain}.daftra.com/api2/v2/invoices?status=unpaid"
+    async with httpx.AsyncClient(timeout=10.0) as client:
+        resp = await client.get(url, headers=headers)
+        data = resp.json()
+        return data.get("data", [])
+```
+
+

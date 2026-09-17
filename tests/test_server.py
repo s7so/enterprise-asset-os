@@ -106,6 +106,14 @@ async def test_security_tool_annotations():
         assert store_tool.annotations.read_only_hint is True
         assert store_tool.annotations.idempotent_hint is True
 
+        unpaid_tool = next(t for t in tools if t.name == "get_unpaid_invoices")
+        assert unpaid_tool.annotations.read_only_hint is True
+        assert unpaid_tool.annotations.idempotent_hint is True
+
+        cash_tool = next(t for t in tools if t.name == "get_cash_flow_summary")
+        assert cash_tool.annotations.read_only_hint is True
+        assert cash_tool.annotations.idempotent_hint is True
+
 
 @pytest.mark.asyncio
 async def test_query_store_inventory_low_stock():
@@ -131,4 +139,74 @@ async def test_query_store_inventory_with_category():
         assert data["status"] == "success"
         for item in data["replenishment_needed"]:
             assert "groceries" in item["category"].lower()
+
+
+@pytest.mark.asyncio
+async def test_get_unpaid_invoices_all():
+    """Verify get_unpaid_invoices returns pending invoices with complete aging attributes."""
+    async with Client(mcp) as client:
+        result = await client.call_tool("get_unpaid_invoices", {})
+        data = result.data
+        assert data["status"] == "success"
+        assert data["total_unpaid_found"] > 0
+        assert len(data["invoices"]) <= 10
+        for inv in data["invoices"]:
+            assert "invoice_number" in inv
+            assert "client_name" in inv
+            assert inv["amount_due"] > 0
+            assert "days_overdue" in inv
+            assert inv["urgency"] in ("CRITICAL", "WARNING", "ATTENTION", "CURRENT")
+
+
+@pytest.mark.asyncio
+async def test_get_unpaid_invoices_overdue_filter():
+    """Verify get_unpaid_invoices correctly isolates accounts overdue >= 30 days."""
+    async with Client(mcp) as client:
+        result = await client.call_tool("get_unpaid_invoices", {"min_days_overdue": 30, "limit": 20})
+        data = result.data
+        assert data["status"] == "success"
+        assert len(data["invoices"]) > 0
+        for inv in data["invoices"]:
+            assert inv["days_overdue"] >= 30
+
+
+@pytest.mark.asyncio
+async def test_get_unpaid_invoices_client_filter():
+    """Verify get_unpaid_invoices filters accurately by client substring."""
+    async with Client(mcp) as client:
+        result = await client.call_tool("get_unpaid_invoices", {"client_name": "الأهرام"})
+        data = result.data
+        assert data["status"] == "success"
+        assert len(data["invoices"]) > 0
+        for inv in data["invoices"]:
+            assert "الأهرام" in inv["client_name"]
+
+
+@pytest.mark.asyncio
+async def test_get_cash_flow_summary_egp():
+    """Verify get_cash_flow_summary aggregates receivables, aging buckets, and top debtors for EGP."""
+    async with Client(mcp) as client:
+        result = await client.call_tool("get_cash_flow_summary", {"currency": "EGP"})
+        data = result.data
+        assert data["status"] == "success"
+        assert data["currency"] == "EGP"
+        assert data["total_invoiced"] > 0
+        assert data["total_receivables_outstanding"] > 0
+        assert "aging_buckets" in data
+        assert "current_0_to_30_days" in data["aging_buckets"]
+        assert "overdue_over_90_days" in data["aging_buckets"]
+        assert len(data["top_5_debtor_clients"]) <= 5
+        assert data["portfolio_health"]["status"] in ("HEALTHY", "MODERATE_WARNING", "HIGH_RISK")
+
+
+@pytest.mark.asyncio
+async def test_get_cash_flow_summary_usd():
+    """Verify get_cash_flow_summary computes currency-segregated figures for USD transactions."""
+    async with Client(mcp) as client:
+        result = await client.call_tool("get_cash_flow_summary", {"currency": "USD"})
+        data = result.data
+        assert data["status"] == "success"
+        assert data["currency"] == "USD"
+        assert data["total_receivables_outstanding"] > 0
+
 

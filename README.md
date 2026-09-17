@@ -8,7 +8,11 @@ Production-grade Model Context Protocol (MCP) server built with **FastMCP 4** an
   - **stdio**: Default local transport for AI hosts with strict **Stdout Isolation** (stdout reserved strictly for UTF-8 newline-delimited JSON-RPC 2.0 frames; all diagnostics directed to `stderr`).
   - **Streamable HTTP**: Stateless HTTP POST/SSE endpoint (`MCP_TRANSPORT=http`) scalable behind round-robin load balancers without session affinity.
 - **MCP Primitives**:
-  - **Tool**: `query_telemetry` with full annotations (`readOnlyHint`, `idempotentHint`, `openWorldHint`).
+  - **Tools**:
+    - `query_telemetry`: Server infrastructure monitoring with strict `readOnlyHint` and `idempotentHint`.
+    - `query_store_inventory`: E-commerce catalog and stock replenishment analyzer with zero-network offline fallback.
+    - `get_unpaid_invoices`: Accounts receivable and overdue invoice aging audit for ERP/SME accounting (Odoo / Daftra schema).
+    - `get_cash_flow_summary`: Executive cash flow, collection rates, aging distribution, and top debtor ranking.
   - **Resource Template**: `config://schemas/{schema_type}` with parameter traversal protection.
   - **Prompt**: `incident_triage_prompt` for automated SRE incident diagnostics.
 
